@@ -1,12 +1,9 @@
-#include "cute.h"
-#include "ide_listener.h"
-#include "xml_listener.h"
-#include "cute_runner.h"
 #include <iostream>
 
+using namespace std;
 
 int main()
 {
-    std::cout << "Test\n";
-	return 0;
+  cout << "Welcome!\n";
+  return 0;
 }
