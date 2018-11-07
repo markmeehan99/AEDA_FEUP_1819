@@ -1,25 +1,11 @@
-/.metadata/
+/Debug/
 
-Projeto_pt1/\.cproject
+\.metadata/
 
-Projeto_pt1/\.project
+Projeto_Parte1/Debug/
 
-Projeto_pt1/\.settings/ch\.hsr\.ifs\.iltis\.cpp\.versionator\.prefs
+Projeto_Parte1/\.settings/
 
-Projeto_pt1/\.settings/language\.settings\.xml
+Projeto_Parte1/\.project
 
-Projeto_pt1/\.settings/org\.eclipse\.cdt\.managedbuilder\.core\.prefs
-
-Projeto_pt1/boost/boost/
-
-Projeto_pt1/Projeto_pt1\.exe\.xml
-
-Projeto_pt1/\.metadata/
-
-Projeto_pt1/ProjetoAEDA/Debug/
-
-Projeto_pt1/ProjetoAEDA/\.settings/
-
-Projeto_pt1/ProjetoAEDA/\.cproject
-
-Projeto_pt1/ProjetoAEDA/\.project
+Projeto_Parte1/\.cproject
