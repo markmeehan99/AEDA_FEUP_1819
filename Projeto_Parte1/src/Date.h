@@ -18,9 +18,10 @@ class Date {
 public:
 	Date();
 	Date(int day, int month, int year);
-	string getDate();
+	string getDate()const;
 	void setDate(int day, int month, int year);
 	bool operator>(const Date &d1);
+	Date& operator=(const Date& d);
 };
 
 #endif /* DATE_H_ */

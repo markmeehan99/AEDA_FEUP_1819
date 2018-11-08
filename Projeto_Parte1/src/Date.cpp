@@ -8,12 +8,14 @@
 #include "Date.h"
 #include <string>
 
+Date::Date(){}
+
 Date::Date(int day, int month, int year) {
 	this->day = day;
 	this->month = month;
 	this->year = year;
 }
-string Date::getDate() {
+string Date::getDate()const {
 	string res;
 
 	res += to_string(day) + "/" + to_string(month) + "/" + to_string(year);
@@ -45,3 +47,14 @@ void Date::setDate(int day, int month, int year){
 		this->month = month;
 		this->year = year;
 }
+
+/*Date& Date::operator=(const Date& d){
+	string date= d.getDate();
+	string day = date.substr(0,2);
+	string month = date.substr(3,2);
+	string year = date.substr(6,2);
+
+	Date data = new Date(stoi(day),stoi(month), stoi(year));
+
+	return &data;
+}*/

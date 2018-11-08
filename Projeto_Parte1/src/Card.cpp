@@ -7,14 +7,18 @@
 
 #include "Card.h"
 
-Card::Card(int id, string name, double credit, string expDate) {
+Card::Card(int id, string name, double credit, Date *expDate) {
 
 	this->id = id;
 	this->name = name;
-	this->name = credit;
-	this->expDate = expDate;
+	this->credit = credit;
+	//this->expDate = expDate;
 }
 
-string Card::getExpDate() {
+Date Card::getExpDate() const{
 	return expDate;
 }
+int Card::getID() const{
+	return id;
+}
+

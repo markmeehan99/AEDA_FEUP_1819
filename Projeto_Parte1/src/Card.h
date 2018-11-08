@@ -8,6 +8,7 @@
 #ifndef CARD_H_
 #define CARD_H_
 
+#include "Date.h"
 #include <string>
 
 using namespace std;
@@ -16,11 +17,12 @@ class Card {
 	int id;
 	string name;
 	double credit;
-	string expDate;
+	Date expDate;
 public:
-	Card(int id, string name, double credit, string expDate);
-	string getExpDate();
+	Card(int id, string name, double credit, Date *expDate);
+	Date getExpDate() const;
 	double getCredit() const;
+	int getID() const;
 
 };
 
