@@ -14,20 +14,23 @@
 
 using namespace std;
 
-class Game{
+class Game {
 private:
 	vector<Review *> reviews;
-	int age_limit;
+	int age_limit = 0;
 	int id;
-	std::string name;
+	string name;
 	float price;
 	int rating;
 	string platform;
 	string genre;
 	string publisher;
+	int totalPlaytime;
 public:
-	Game(int age_limit, int id, std::string name, float price, int rating,
+	Game();
+	Game(int age_limit, std::string name, float price, int rating,
 			string platform, string genre, string publisher);
+	string getName() const;
 	int getID() const;
 	int getAgeLimit() const;
 	float getPrice() const;
@@ -35,6 +38,9 @@ public:
 	string getPlatform() const;
 	string getGenre() const;
 	string getPublisher() const;
+	int getPlaytime() const;
+	bool changePrice();
+	int getPlayTime() const;
 
 };
 

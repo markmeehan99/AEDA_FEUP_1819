@@ -12,7 +12,6 @@ User::User() {
 
 }
 
-User::~User() {
-	// TODO Auto-generated destructor stub
+string User::getName() const {
+	return name;
 }
-

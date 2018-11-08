@@ -8,9 +8,19 @@
 #ifndef CARD_H_
 #define CARD_H_
 
+#include <string>
+
+using namespace std;
+
 class Card {
+	int id;
+	string name;
+	double credit;
+	string expDate;
 public:
-	Card();
+	Card(int id, string name, double credit, string expDate);
+	string getExpDate();
+	double getCredit() const;
 
 };
 

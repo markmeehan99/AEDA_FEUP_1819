@@ -7,9 +7,14 @@
 
 #include "Card.h"
 
-Card::Card() {
-	// TODO Auto-generated constructor stub
+Card::Card(int id, string name, double credit, string expDate) {
 
+	this->id = id;
+	this->name = name;
+	this->name = credit;
+	this->expDate = expDate;
 }
 
-
+string Card::getExpDate() {
+	return expDate;
+}
