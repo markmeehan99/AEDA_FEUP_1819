@@ -103,7 +103,7 @@ void Date::setDate(int day, int month, int year){
 		break;
 	}
 
-//hehe
+
 	//If date is invalid, throws exception
 	if (InvDate)
 		throw InvalidDate(day, month, year);

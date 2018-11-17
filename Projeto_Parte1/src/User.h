@@ -39,6 +39,7 @@ public:
 	bool addCard(Card *card);
 	void makeReview(Review *review, Game *game);//REVER UTILIDADE DISTO
 	void importUserInfo();
+	void exportuserInfo();
 
 };
 
