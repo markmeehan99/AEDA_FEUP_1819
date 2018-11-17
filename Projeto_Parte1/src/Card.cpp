@@ -22,3 +22,14 @@ int Card::getID() const{
 	return id;
 }
 
+double Card::getCredit() const{
+	return credit;
+}
+void Card::addCredit(double amount){
+
+	if(amount >=0)
+		throw InvalidAmount(amount);
+
+	credit += amount;
+}
+

@@ -23,7 +23,23 @@ public:
 	Date getExpDate() const;
 	double getCredit() const;
 	int getID() const;
-
+	void getCredit();
+	void removeCredit(double amount);
+	void addCredit(double amount);
 };
+
+
+class InvalidAmount{
+public:
+	double amount;
+	InvalidAmount(double amount){
+		this->amount = amount;
+	}
+	double getAmount(){
+		return amount;
+	}
+};
+
+
 
 #endif /* CARD_H_ */
