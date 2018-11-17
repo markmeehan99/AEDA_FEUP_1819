@@ -6,9 +6,13 @@
  */
 
 #include "Game.h"
+#include <iostream>
 #include <string>
+#include <fstream>
 
 static int ID = 0;
+
+bool empty(std::fstream& pFile);
 
 Game::Game() {
 
@@ -52,7 +56,49 @@ string Game::getGenre() const {
 string Game::getPublisher() const {
 	return publisher;
 }
-int Game::getPlaytime() const {
+int Game::getPlayTime() const {
 	return totalPlaytime;
+}
+
+void Game::exportGameInfo(char type, Date date, int playTime) {
+
+	if (type != 'P')
+		cout << "Invalid info type" << endl;
+
+	string fileName = this->getName() + ".txt";
+
+	fstream File(fileName, ios::app);
+
+	/*if (File.tellg() == 0) {
+	 File << this->getName() << endl << this->getID() << endl
+	 << this->getAgeLimit() << endl << this->getPrice() << endl
+	 << this->getRating() << endl << this->getPlatform() << endl
+	 << this->getGenre() << endl << this->getPublisher() << endl
+	 << this->getPlayTime();
+	 }*/
+
+	if (File.is_open()) {
+
+		File << type << " " << date.getDate() << " " << playTime << endl;
+	}
+
+	File.close();
+}
+void Game::exportGameInfo(char type, Date date) {
+
+	if (type != 'U')
+		cout << "Invalid info type" << endl;
+
+	string fileName = this->getName() + ".txt";
+
+	fstream File(fileName, ios::app);
+
+	if (File.is_open()) {
+
+		File << type << " " << date.getDate() << endl;
+	}
+
+	File.close();
+
 }
 
