@@ -30,10 +30,20 @@ int main() {
 	//Card a(2, "ab", 23, A);
 	//Card b(3, "ab", 23, A);
 
+
 	HomeGame C(2,"GAME", 12,12,"aa", "aaa", " aaaa");
+
+
+	/*Game C(2,"GAME", 12,12,"aa", "aaa", " aaaa");
+
+	Game C(2, "GAME", 12, 12, "aa", "aaa", " aaaa");
 
 	C.exportGameInfo('P', A, 2);
 	C.exportGameInfo('U', A);
+	C.exportGameInfo('P', A, 4);
+	C.exportGameInfo('P', A, 2);
+	C.exportGameInfo('U', A);
+	C.exportGameInfo('P', A, 4);*/
 
 	return 0;
 }

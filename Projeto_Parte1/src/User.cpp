@@ -6,6 +6,9 @@
  */
 
 #include "User.h"
+#include "Game.h"
+#include "Card.h"
+#include <iostream>
 
 User::User() {
 	// TODO Auto-generated constructor stub
@@ -46,7 +49,26 @@ bool User::addCard(Card *card) {
 	return true;
 }
 
-void buyGame(Game *game){
+void User::buyGame(Game *game){
 
+	for (size_t i = 0; i < games.size(); i++) {
+			if (games.at(i) == game){
+				cout << "Game already bought" << endl; //criar excepção
+				return;
+			}
+		}
 
+	int c= -1;
+	for (size_t i = 0; i < cards.size(); i++) {
+			if(game->getPrice() < cards.at(i)->getCredit()){
+					c = i;
+			}
+	}
+	if(c == -1){
+		cout << "Not enough money" << endl; //criar excepção
+		return;
+	}
+
+	cards.at(c)->removeCredit(game->getPrice());
+	games.push_back(game);
 }

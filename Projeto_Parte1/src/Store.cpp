@@ -24,13 +24,13 @@ bool Store::addGame(Game *game) {
 }
 
 Game* Store::getGame(string gameName) {
-	Game *g = new Game();
+
 	for (size_t i = 0; i < allGames.size(); i++) {
 		if (allGames.at(i)->getName() == gameName)
 			return allGames.at(i);
 	}
 
-	return g;
+	throw NonExistentGame(gameName);
 }
 
 User* Store::getUser(string userName) {

@@ -14,7 +14,7 @@ static int ID = 0;
 
 bool empty(std::fstream& pFile);
 
-Game::Game(int age_limit, string name, float price, int rating, string platform,
+Game::Game(int age_limit, string name, double price, int rating, string platform,
 		string genre, string publisher) {
 	ID++;
 	this->age_limit = age_limit;
@@ -37,7 +37,7 @@ int Game::getID() const {
 int Game::getAgeLimit() const {
 	return age_limit;
 }
-float Game::getPrice() const {
+double Game::getPrice() const {
 	return price;
 }
 int Game::getRating() const {
@@ -56,22 +56,31 @@ int Game::getPlayTime() const {
 	return totalPlaytime;
 }
 
+void gameInfoHeader(Game *game) {
+
+	string fileName = game->getName() + ".txt";
+	fstream File(fileName, ios::app);
+
+	File.seekg(0, ios::end);
+	if (File.tellg() == 0) {
+		File << game->getName() << endl << game->getID() << endl
+				<< game->getAgeLimit() << endl << game->getPrice() << endl
+				<< game->getRating() << endl << game->getPlatform() << endl
+				<< game->getGenre() << endl << game->getPublisher() << endl
+				<< game->getPlayTime() << endl;
+	}
+
+}
+
 void Game::exportGameInfo(char type, Date date, int playTime) {
 
 	if (type != 'P')
 		cout << "Invalid info type" << endl;
 
+	gameInfoHeader(this);
+
 	string fileName = this->getName() + ".txt";
-
 	fstream File(fileName, ios::app);
-
-	/*if (File.tellg() == 0) {
-	 File << this->getName() << endl << this->getID() << endl
-	 << this->getAgeLimit() << endl << this->getPrice() << endl
-	 << this->getRating() << endl << this->getPlatform() << endl
-	 << this->getGenre() << endl << this->getPublisher() << endl
-	 << this->getPlayTime();
-	 }*/
 
 	if (File.is_open()) {
 
@@ -80,13 +89,15 @@ void Game::exportGameInfo(char type, Date date, int playTime) {
 
 	File.close();
 }
+
 void Game::exportGameInfo(char type, Date date) {
 
 	if (type != 'U')
 		cout << "Invalid info type" << endl;
 
-	string fileName = this->getName() + ".txt";
+	gameInfoHeader(this);
 
+	string fileName = this->getName() + ".txt";
 	fstream File(fileName, ios::app);
 
 	if (File.is_open()) {
@@ -95,5 +106,4 @@ void Game::exportGameInfo(char type, Date date) {
 	}
 
 	File.close();
-
 }

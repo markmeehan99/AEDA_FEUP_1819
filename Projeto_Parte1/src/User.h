@@ -8,11 +8,13 @@
 #ifndef USER_H_
 #define USER_H_
 
+#include <string>
+#include <vector>
+#include <utility>
 #include "Date.h"
 #include "Game.h"
 #include "Card.h"
-#include <string>
-#include <vector>
+
 
 class User {
 	string name;
@@ -21,6 +23,7 @@ class User {
 	string address;
 	vector<Game*> games;
 	vector <Card*> cards;
+	vector <pair<Game*,Date> > updateDate;
 
 public:
 	User();
@@ -32,11 +35,12 @@ public:
 	vector <Game*> getGames() const;
 	vector <Card*> getCards() const;
 
-	bool buyGame(Game *game);
+	void buyGame(Game *game);
 	bool addCard(Card *card);
 	void makeReview(Review *review, Game *game);//REVER UTILIDADE DISTO
 	void importUserInfo();
 
 };
+
 
 #endif /* USER_H_ */

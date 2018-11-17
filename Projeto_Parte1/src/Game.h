@@ -33,7 +33,7 @@ public:
 	string getName() const;
 	int getID() const;
 	int getAgeLimit() const;
-	float getPrice() const;
+	double getPrice() const;
 	int getRating() const;
 	string getPlatform() const;
 	string getGenre() const;

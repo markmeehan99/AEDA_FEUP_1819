@@ -23,7 +23,6 @@ public:
 	Date getExpDate() const;
 	double getCredit() const;
 	int getID() const;
-	void getCredit();
 	void removeCredit(double amount);
 	void addCredit(double amount);
 };

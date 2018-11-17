@@ -30,4 +30,10 @@ public:
 
 };
 
+class NonExistentGame{
+	string name;
+public:
+	NonExistentGame(string name){this->name = name;}
+};
+
 #endif /* STORE_H_ */

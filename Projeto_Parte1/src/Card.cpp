@@ -25,6 +25,7 @@ int Card::getID() const{
 double Card::getCredit() const{
 	return credit;
 }
+
 void Card::addCredit(double amount){
 
 	if(amount <=0)
