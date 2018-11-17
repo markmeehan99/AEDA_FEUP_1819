@@ -9,6 +9,7 @@
 #define GAME_H_
 
 #include "Review.h"
+#include "Date.h"
 #include <vector>
 #include <string>
 
@@ -41,7 +42,10 @@ public:
 	int getPlaytime() const;
 	bool changePrice();
 	int getPlayTime() const;
-
+	void buyGame(Game *game);
+	void exportGameInfo(char type, Date date, int playTime); //overload for Updates
+	void exportGameInfo(char type, Date date);
+	void importGameInfo();
 };
 
 #endif /* GAME_H_ */
