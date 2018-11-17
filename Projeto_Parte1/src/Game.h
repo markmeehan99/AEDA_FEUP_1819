@@ -28,9 +28,6 @@ private:
 	string publisher;
 	int totalPlaytime;
 public:
-	Game();
-	Game(int age_limit, std::string name, float price, int rating,
-			string platform, string genre, string publisher);
 	string getName() const;
 	int getID() const;
 	int getAgeLimit() const;
