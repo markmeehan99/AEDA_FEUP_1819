@@ -18,7 +18,7 @@ private:
 	bool isMonthlyPayment;
 	float subscriptionCost;
 public:
-	OnlineGame(int age_limit, string name, float price, int rating,
+	OnlineGame(int age_limit, string name, double price, int rating,
 			string platform, string genre, string publisher, float subscriptionCost);
 };
 

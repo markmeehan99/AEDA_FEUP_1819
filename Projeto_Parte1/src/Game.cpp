@@ -14,6 +14,19 @@ static int ID = 0;
 
 bool empty(std::fstream& pFile);
 
+Game::Game(int age_limit, string name, float price, int rating, string platform,
+		string genre, string publisher) {
+	ID++;
+	this->age_limit = age_limit;
+	this->name = name;
+	this->price = price;
+	this->rating = rating;
+	this->platform = platform;
+	this->genre = genre;
+	this->publisher = publisher;
+	this->id = ID;
+}
+
 string Game::getName() const {
 	return name;
 }

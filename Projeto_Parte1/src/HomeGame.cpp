@@ -6,17 +6,9 @@
  */
 
 #include "HomeGame.h"
+#include "Game.h"
 
-HomeGame::HomeGame(int age_limit, string name, float price, int rating, string platform,
-		string genre, string publisher) {
-	ID++;
-	this->age_limit = age_limit;
-	this->name = name;
-	this->price = price;
-	this->rating = rating;
-	this->platform = platform;
-	this->genre = genre;
-	this->publisher = publisher;
-	this->id = ID;
-  
+HomeGame::HomeGame(int age_limit, string name, double price, int rating, string platform,
+		string genre, string publisher):Game(age_limit, name, price, rating, platform, genre, publisher) {
+
 }

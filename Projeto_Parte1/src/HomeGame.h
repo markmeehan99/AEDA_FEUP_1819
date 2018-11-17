@@ -15,11 +15,11 @@
 using namespace std;
 
 class HomeGame: public Game {
-private;
+private:
 	Date lastUpdate;
 public:
-	HomeGame(int age_limit, string name, float price, int rating,
-			string platform, string genre, string publisher);
+	HomeGame(int age_limit, string name, double price, int rating, string platform,
+		string genre, string publisher);
 
 };
 

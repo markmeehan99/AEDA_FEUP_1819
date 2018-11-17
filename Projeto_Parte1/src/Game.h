@@ -21,13 +21,15 @@ private:
 	int age_limit = 0;
 	int id;
 	string name;
-	float price;
+	double price;
 	int rating;
 	string platform;
 	string genre;
 	string publisher;
 	int totalPlaytime;
 public:
+	Game(int age_limit, string name, double price, int rating, string platform,
+		string genre, string publisher);
 	string getName() const;
 	int getID() const;
 	int getAgeLimit() const;
