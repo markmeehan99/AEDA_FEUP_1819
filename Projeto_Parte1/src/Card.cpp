@@ -27,9 +27,20 @@ double Card::getCredit() const{
 }
 void Card::addCredit(double amount){
 
-	if(amount >=0)
+	if(amount <=0)
 		throw InvalidAmount(amount);
 
 	credit += amount;
 }
+
+void Card::removeCredit(double amount){
+
+	if(amount <= 0 || amount > credit){
+		throw InvalidAmount(amount);
+	}
+
+	credit -= amount;
+}
+
+
 

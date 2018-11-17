@@ -46,3 +46,7 @@ bool User::addCard(Card *card) {
 	return true;
 }
 
+void buyGame(Game *game){
+
+
+}
