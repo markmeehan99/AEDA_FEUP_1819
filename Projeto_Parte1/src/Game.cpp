@@ -14,10 +14,6 @@ static int ID = 0;
 
 bool empty(std::fstream& pFile);
 
-Game::Game() {
-
-}
-
 Game::Game(int age_limit, string name, float price, int rating, string platform,
 		string genre, string publisher) {
 	ID++;
@@ -29,8 +25,8 @@ Game::Game(int age_limit, string name, float price, int rating, string platform,
 	this->genre = genre;
 	this->publisher = publisher;
 	this->id = ID;
-
 }
+
 string Game::getName() const {
 	return name;
 }
@@ -101,4 +97,3 @@ void Game::exportGameInfo(char type, Date date) {
 	File.close();
 
 }
-

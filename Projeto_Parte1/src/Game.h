@@ -21,16 +21,15 @@ private:
 	int age_limit = 0;
 	int id;
 	string name;
-	float price;
+	double price;
 	int rating;
 	string platform;
 	string genre;
 	string publisher;
 	int totalPlaytime;
 public:
-	Game();
-	Game(int age_limit, std::string name, float price, int rating,
-			string platform, string genre, string publisher);
+	Game(int age_limit, string name, double price, int rating, string platform,
+		string genre, string publisher);
 	string getName() const;
 	int getID() const;
 	int getAgeLimit() const;
