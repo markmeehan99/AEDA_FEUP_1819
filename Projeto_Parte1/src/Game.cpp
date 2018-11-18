@@ -65,7 +65,7 @@ void gameInfoHeader(Game *game) {
 				<< game->getAgeLimit() << endl << game->getPrice() << endl
 				<< game->getRating() << endl << game->getPlatform() << endl
 				<< game->getGenre() << endl << game->getPublisher() << endl
-				<< game->getPlayTime() << endl<< endl;
+				<< game->getTotalPlayTime() << endl<< endl;
 	}
 
 }

@@ -25,7 +25,7 @@ int main() {
 	cout << "!!!Buenos Dias Matosinhos!!!" << endl;
 
 	Date A(12, 2, 18);
-	//Date B(11, 2, 18);
+	Date B(11, 2, 18);
 	User u("Joao", "mail@gmail.com", 32, "rua dos abra�os");
 	//Card a(2, "ab", 23, A);
 	//Card b(3, "ab", 23, A);

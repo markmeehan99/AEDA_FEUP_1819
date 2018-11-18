@@ -122,11 +122,6 @@ void User::importUserInfo()
 	else cout << "Nao abriu file" << endl;
 }
 
-string User::getAddress() const
-{
-	return this->address;
-}
-
 void userInfoHeader(User *user) {
 
 	string fileName = user->getName() + ".txt";

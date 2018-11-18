@@ -43,7 +43,7 @@ void gameInfoHeader(OnlineGame *game) {
 				<< game->getAgeLimit() << endl << game->getPrice() << endl
 				<< game->getRating() << endl << game->getPlatform() << endl
 				<< game->getGenre() << endl << game->getPublisher() << endl
-				<< game->getPlayTime() << endl << game->getPaymentMethod()<< endl << game->getSubscriptionCost() << endl << endl;
+				<< game->getTotalPlayTime() << endl << game->getPaymentMethod()<< endl << game->getSubscriptionCost() << endl << endl;
 	}
 
 }

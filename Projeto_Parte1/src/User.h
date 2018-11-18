@@ -35,7 +35,6 @@ public:
 	string getAddress() const;
 	vector <Game*> getGames() const;
 	vector <Card*> getCards() const;
-	string getAddress() const;
 
 	void buyGame(Game *game);
 	bool addCard(Card *card);
