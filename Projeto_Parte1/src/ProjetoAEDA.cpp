@@ -25,11 +25,13 @@ int main() {
 	cout << "!!!Buenos Dias Matosinhos!!!" << endl;
 
 	Date A(12, 2, 18);
-	Date B(11, 2, 18);
-	//User u("Joï¿½o", "adasd", 32, "asdas");
+	//Date B(11, 2, 18);
+	User u("Joao", "mail@gmail.com", 32, "rua dos abraços");
 	//Card a(2, "ab", 23, A);
 	//Card b(3, "ab", 23, A);
+	u.importUserInfo();
 
+	//cout << u.getAge() << endl << u.getEmail() << endl << u.getName() << endl << u.getAddress() << endl;
 
 	HomeGame C(2,"GAME", 12,12,"aa", "aaa", " aaaa");
 

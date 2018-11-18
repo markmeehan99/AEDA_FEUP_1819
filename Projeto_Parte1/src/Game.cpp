@@ -52,9 +52,7 @@ string Game::getGenre() const {
 string Game::getPublisher() const {
 	return publisher;
 }
-int Game::getPlayTime() const {
-	return totalPlaytime;
-}
+
 
 void gameInfoHeader(Game *game) {
 
@@ -67,7 +65,7 @@ void gameInfoHeader(Game *game) {
 				<< game->getAgeLimit() << endl << game->getPrice() << endl
 				<< game->getRating() << endl << game->getPlatform() << endl
 				<< game->getGenre() << endl << game->getPublisher() << endl
-				<< game->getPlayTime() << endl;
+				<< game->getTotalPlayTime() << endl;
 	}
 
 }
@@ -107,3 +105,8 @@ void Game::exportGameInfo(char type, Date date) {
 
 	File.close();
 }
+
+int Game::getTotalPlayTime() const {
+	return this->totalPlaytime;
+}
+

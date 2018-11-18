@@ -16,6 +16,14 @@ Date::Date(int day, int month, int year) {
 	this->year = year;
 }
 
+Date::Date(string date)
+{
+	this->day = stoi(date.substr(0, 2));
+	this->month = stoi(date.substr(3, 2));
+	this->year = stoi(date.substr(6, 2));
+
+}
+
 string Date::getDate()const {
 	string res;
 

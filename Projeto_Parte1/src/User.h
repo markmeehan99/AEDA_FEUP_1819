@@ -23,7 +23,7 @@ class User {
 	string address;
 	vector<Game*> games;
 	vector <Card*> cards;
-	vector <pair<Game*,Date> > updateDate;
+	vector <pair<Game*,Date*> > updateDate;
 
 public:
 	User();
@@ -34,6 +34,7 @@ public:
 	int getAge() const;
 	vector <Game*> getGames() const;
 	vector <Card*> getCards() const;
+	string getAddress() const;
 
 	void buyGame(Game *game);
 	bool addCard(Card *card);
