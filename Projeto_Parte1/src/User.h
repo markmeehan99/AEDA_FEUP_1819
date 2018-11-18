@@ -32,6 +32,7 @@ public:
 	string getName() const;
 	string getEmail() const;
 	int getAge() const;
+	string getAddress() const;
 	vector <Game*> getGames() const;
 	vector <Card*> getCards() const;
 
@@ -39,7 +40,8 @@ public:
 	bool addCard(Card *card);
 	void makeReview(Review *review, Game *game);//REVER UTILIDADE DISTO
 	void importUserInfo();
-	void exportuserInfo();
+	void exportUserInfo(char type, Date date,Game game, int playTime);
+	void exportUserInfo(char type, Date date, Game game);
 
 };
 

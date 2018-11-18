@@ -67,7 +67,7 @@ void gameInfoHeader(Game *game) {
 				<< game->getAgeLimit() << endl << game->getPrice() << endl
 				<< game->getRating() << endl << game->getPlatform() << endl
 				<< game->getGenre() << endl << game->getPublisher() << endl
-				<< game->getPlayTime() << endl;
+				<< game->getPlayTime() << endl<< endl;
 	}
 
 }
@@ -84,7 +84,7 @@ void Game::exportGameInfo(char type, Date date, int playTime) {
 
 	if (File.is_open()) {
 
-		File << type << " " << date.getDate() << " " << playTime << endl;
+		File << type << endl << date.getDate() << endl << playTime << endl<< endl;
 	}
 
 	File.close();
@@ -102,7 +102,7 @@ void Game::exportGameInfo(char type, Date date) {
 
 	if (File.is_open()) {
 
-		File << type << " " << date.getDate() << endl;
+		File << type << endl << date.getDate() << endl<<endl;
 	}
 
 	File.close();

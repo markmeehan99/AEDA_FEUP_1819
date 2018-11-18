@@ -26,24 +26,26 @@ int main() {
 
 	Date A(12, 2, 18);
 	Date B(11, 2, 18);
-	//User u("Jo�o", "adasd", 32, "asdas");
+	User u("Joe", "@gmail", 32, "Canada dos Rabos");
 	//Card a(2, "ab", 23, A);
 	//Card b(3, "ab", 23, A);
 
 
-	HomeGame C(2,"GAME", 12,12,"aa", "aaa", " aaaa");
+	HomeGame C(2,"JOGO1", 12, 12,"xBox", "FPS", "UBISOFT");
 
 
-	/*Game C(2,"GAME", 12,12,"aa", "aaa", " aaaa");
+	OnlineGame E(2,"JOGO2", 12,12,"PS4", "RPG", "Rockstar", 2);
 
-	Game C(2, "GAME", 12, 12, "aa", "aaa", " aaaa");
+
 
 	C.exportGameInfo('P', A, 2);
 	C.exportGameInfo('U', A);
 	C.exportGameInfo('P', A, 4);
 	C.exportGameInfo('P', A, 2);
 	C.exportGameInfo('U', A);
-	C.exportGameInfo('P', A, 4);*/
+	C.exportGameInfo('P', A, 4);
+	u.exportUserInfo('P', A, E, 2);
+	u.exportUserInfo('U', B, C);
 
 	return 0;
 }

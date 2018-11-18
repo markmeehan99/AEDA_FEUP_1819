@@ -26,7 +26,7 @@ private:
 	string platform;
 	string genre;
 	string publisher;
-	int totalPlaytime;
+	int totalPlaytime =0;
 public:
 	Game(int age_limit, string name, double price, int rating, string platform,
 		string genre, string publisher);
@@ -42,8 +42,8 @@ public:
 	bool changePrice();
 	int getPlayTime() const;
 	void buyGame(Game *game);
-	void exportGameInfo(char type, Date date, int playTime); //overload for Updates
-	void exportGameInfo(char type, Date date);
+	virtual void exportGameInfo(char type, Date date, int playTime); //overload for Updates
+	virtual void exportGameInfo(char type, Date date);
 	void importGameInfo();
 };
 
