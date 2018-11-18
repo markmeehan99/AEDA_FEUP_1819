@@ -39,9 +39,6 @@ void Card::removeCredit(double amount){
 	if(amount <= 0 || amount > credit){
 		throw InvalidAmount(amount);
 	}
-
+	
 	credit -= amount;
 }
-
-
-

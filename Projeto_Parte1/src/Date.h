@@ -18,6 +18,7 @@ class Date {
 public:
 	Date();
 	Date(int day, int month, int year);
+	Date(string date);
 	string getDate()const;
 	void setDate(int day, int month, int year);
 	bool operator>(const Date &d1);

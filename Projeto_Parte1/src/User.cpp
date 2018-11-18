@@ -77,6 +77,56 @@ void User::buyGame(Game *game) {
 	games.push_back(game);
 }
 
+void User::importUserInfo()
+{
+	ifstream is("UserInfoTemplate.txt");
+
+	string name, email, age, address;
+
+	if (is.is_open())
+	{
+		getline(is, name);
+		getline(is, email);
+		getline(is, age);
+		getline(is, address);
+
+		this->address = address;
+		this->age = stoi(age);
+		this->email = email;
+		this->name = name;
+
+		string temp;
+
+		getline(is, temp);
+
+		string ignore, type, date, game, no_hours;
+
+		//Import user info
+		while (!is.eof()) {
+			getline(is, type); //TRATAR)
+			getline(is, date);
+			getline(is, game);
+			getline(is, no_hours);
+			getline(is, ignore);
+
+			for (Game* g : games) {
+				if (g->getName() == game) {
+					//found game
+					Date *d = new Date(date);
+
+					this->updateDate.push_back(make_pair(g, d));
+				}
+			}
+		}
+	}
+	else cout << "Nao abriu file" << endl;
+}
+
+string User::getAddress() const
+{
+	return this->address;
+}
+
 void userInfoHeader(User *user) {
 
 	string fileName = user->getName() + ".txt";

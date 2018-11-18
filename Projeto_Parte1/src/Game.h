@@ -38,9 +38,8 @@ public:
 	string getPlatform() const;
 	string getGenre() const;
 	string getPublisher() const;
-	int getPlaytime() const;
+	int getTotalPlayTime() const;
 	bool changePrice();
-	int getPlayTime() const;
 	void buyGame(Game *game);
 	virtual void exportGameInfo(char type, Date date, int playTime); //overload for Updates
 	virtual void exportGameInfo(char type, Date date);

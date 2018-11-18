@@ -1,11 +1,19 @@
-This file should be named  "*UserName*Info.txt"
-Each line represents a new Entry.
-Entries will either represent a new gameUpdate(U), playSession (P)
+mark
+cona@gmail.com
+69
+canada dos rabos
 
-All entries will start with their characterSymbol, followed by date.
-Additionally type P entries should have the respective gameName,playTime .
+P
+21/10/18
+Jogo 
+3
 
-Example of entries:
-P 21/10/18 "Jogo" 3
-U 22/10/18 
-P 23/10/18 "Joguinho" 2
+U
+22/10/18
+"cona : resmastered"
+69
+
+P
+23/10/18
+Joguinho
+2
