@@ -25,29 +25,33 @@ int main() {
 	cout << "!!!Buenos Dias Matosinhos!!!" << endl;
 
 	Date A(12, 2, 18);
-	Date B(11, 2, 18);
-	User u("Joao", "mail@gmail.com", 32, "rua dos abra�os");
-	//Card a(2, "ab", 23, A);
+
+	Card *a = new Card(2, "ab", 23, A);
+	Game *C = new OnlineGame(2, "JOGO1", 12, 12, "xBox", "FPS", "UBISOFT", 1, 1);
+	User u("Joao", "mail@gmail.com", 32, "rua dos abros");
+	u.addCard(a);
+	u.buyGame(C);
 	//Card b(3, "ab", 23, A);
-	u.importUserInfo();
+
+	cout << C->getSubscriptionCost();
+
 
 	//cout << u.getAge() << endl << u.getEmail() << endl << u.getName() << endl << u.getAddress() << endl;
 
-	HomeGame C(2,"JOGO1", 12, 12,"xBox", "FPS", "UBISOFT");
 
+	//OnlineGame E(2, "JOGO2", 12, 12, "PS4", "RPG", "Rockstar", 2);
 
-	OnlineGame E(2,"JOGO2", 12,12,"PS4", "RPG", "Rockstar", 2);
+	//cout << a.getCredit() << " " << a.getExpDate().getDate() << " " << a.getID()
+			//<< " " << a.getName()<< " "<<A.getDate() << endl;
 
-
-
-	C.exportGameInfo('P', A, 2);
-	C.exportGameInfo('U', A);
-	C.exportGameInfo('P', A, 4);
-	C.exportGameInfo('P', A, 2);
-	C.exportGameInfo('U', A);
-	C.exportGameInfo('P', A, 4);
-	u.exportUserInfo('P', A, E, 2);
-	u.exportUserInfo('U', B, C);
+	/*C.exportGameInfo('P', A, 2);
+	 C.exportGameInfo('U', A);
+	 C.exportGameInfo('P', A, 4);
+	 C.exportGameInfo('P', A, 2);
+	 C.exportGameInfo('U', A);
+	 C.exportGameInfo('P', A, 4);
+	 u.exportUserInfo('P', A, E, 2);
+	 u.exportUserInfo('U', B, C);*/
 
 	return 0;
 }

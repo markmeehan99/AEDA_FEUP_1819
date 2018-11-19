@@ -8,7 +8,8 @@
 #include "Date.h"
 #include <string>
 
-Date::Date(){}
+Date::Date() {
+}
 
 Date::Date(int day, int month, int year) {
 	this->day = day;
@@ -16,17 +17,15 @@ Date::Date(int day, int month, int year) {
 	this->year = year;
 }
 
-Date::Date(string date)
-{
+Date::Date(string date) {
 	this->day = stoi(date.substr(0, 2));
 	this->month = stoi(date.substr(3, 2));
 	this->year = stoi(date.substr(6, 2));
 
 }
 
-string Date::getDate()const {
+string Date::getDate() const {
 	string res;
-
 	res += to_string(day) + "/" + to_string(month) + "/" + to_string(year);
 	return res;
 }
@@ -49,7 +48,7 @@ bool Date::operator>(const Date &d1) {
 	return false;
 }
 
-void Date::setDate(int day, int month, int year){
+void Date::setDate(int day, int month, int year) {
 	bool InvDate = false; //If date is invalid
 
 	//Checks year
@@ -57,7 +56,7 @@ void Date::setDate(int day, int month, int year){
 		InvDate = true;
 
 	//Checks month and respective day
-	switch(month) {
+	switch (month) {
 	case 1:
 		if (day < 1 || day > 31)
 			InvDate = false;
@@ -111,7 +110,6 @@ void Date::setDate(int day, int month, int year){
 		break;
 	}
 
-
 	//If date is invalid, throws exception
 	if (InvDate)
 		throw InvalidDate(day, month, year);
@@ -121,3 +119,12 @@ void Date::setDate(int day, int month, int year){
 		this->year = year;
 	}
 }
+
+void Date::operator=(Date d) {
+
+	this->day = day;
+	this->month = month;
+	this->year = year;
+
+}
+

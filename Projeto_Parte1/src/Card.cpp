@@ -6,8 +6,9 @@
  */
 
 #include "Card.h"
+#include "Date.h"
 
-Card::Card(int id, string name, double credit, Date *expDate) {
+Card::Card(int id, string name, double credit, Date expDate) {
 
 	this->id = id;
 	this->name = name;
@@ -15,30 +16,34 @@ Card::Card(int id, string name, double credit, Date *expDate) {
 	//this->expDate = expDate;
 }
 
-Date Card::getExpDate() const{
+Date Card::getExpDate() const {
 	return expDate;
 }
-int Card::getID() const{
+int Card::getID() const {
 	return id;
 }
+string Card::getName() const {
+	return name;
+}
 
-double Card::getCredit() const{
+double Card::getCredit() const {
 	return credit;
 }
 
-void Card::addCredit(double amount){
+void Card::addCredit(double amount) {
 
-	if(amount <=0)
+	if (amount <= 0)
 		throw InvalidAmount(amount);
 
 	credit += amount;
 }
 
-void Card::removeCredit(double amount){
+void Card::removeCredit(double amount) {
 
-	if(amount <= 0 || amount > credit){
+	if (amount <= 0 || amount > credit) {
 		throw InvalidAmount(amount);
 	}
-	
+
 	credit -= amount;
 }
+

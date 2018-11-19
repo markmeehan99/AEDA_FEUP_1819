@@ -22,7 +22,7 @@ public:
 	string getDate()const;
 	void setDate(int day, int month, int year);
 	bool operator>(const Date &d1);
-	Date& operator=(const Date& d);
+	void operator=(Date d);
 };
 
 

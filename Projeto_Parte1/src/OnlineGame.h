@@ -15,11 +15,12 @@ using namespace std;
 
 class OnlineGame: public Game {
 private:
-	bool isMonthlyPayment;
+	bool isMonthly;
 	double subscriptionCost;
 public:
 	OnlineGame(int age_limit, string name, double price, int rating,
-			string platform, string genre, string publisher, double subscriptionCost);
+			string platform, string genre, string publisher,
+			double subscriptionCost, bool isMonthly);
 	bool getPaymentMethod() const;
 	double getSubscriptionCost() const;
 	void exportGameInfo(char type, Date date, int playTime); //overload for Updates

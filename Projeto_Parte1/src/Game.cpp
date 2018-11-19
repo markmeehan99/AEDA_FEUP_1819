@@ -110,3 +110,11 @@ int Game::getTotalPlayTime() const {
 	return this->totalPlaytime;
 }
 
+void Game::addPlayTime(int playTime){
+
+	totalPlaytime += playTime;
+}
+
+double Game::getSubscriptionCost() const{
+
+}

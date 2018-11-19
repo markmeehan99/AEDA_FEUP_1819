@@ -12,20 +12,20 @@
 
 OnlineGame::OnlineGame(int age_limit, string name, double price, int rating,
 		string platform, string genre, string publisher,
-		double subscriptionCost) :
+		double subscriptionCost,  bool isMontlhy) :
 		Game(age_limit, name, price, rating, platform, genre, publisher) {
 	if (subscriptionCost != 0) {
 		this->subscriptionCost = subscriptionCost;
-		this->isMonthlyPayment = true;
+		this->isMonthly = true;
 	} else {
 		this->subscriptionCost = subscriptionCost;
-		this->isMonthlyPayment = false;
+		this->isMonthly = false;
 	}
 
 }
 
 bool OnlineGame::getPaymentMethod() const {
-	return isMonthlyPayment;
+	return isMonthly;
 }
 
 double OnlineGame::getSubscriptionCost() const {
@@ -43,7 +43,8 @@ void gameInfoHeader(OnlineGame *game) {
 				<< game->getAgeLimit() << endl << game->getPrice() << endl
 				<< game->getRating() << endl << game->getPlatform() << endl
 				<< game->getGenre() << endl << game->getPublisher() << endl
-				<< game->getTotalPlayTime() << endl << game->getPaymentMethod()<< endl << game->getSubscriptionCost() << endl << endl;
+				<< game->getTotalPlayTime() << endl << game->getPaymentMethod()
+				<< endl << game->getSubscriptionCost() << endl << endl;
 	}
 
 }
@@ -67,7 +68,7 @@ void OnlineGame::exportGameInfo(char type, Date date, int playTime) { //For PLAY
 	File.close();
 }
 
-void OnlineGame::exportGameInfo(char type, Date date){ // for UPDATES
+void OnlineGame::exportGameInfo(char type, Date date) { // for UPDATES
 	if (type != 'U')
 		cout << "Invalid info type" << endl;
 
@@ -78,7 +79,7 @@ void OnlineGame::exportGameInfo(char type, Date date){ // for UPDATES
 
 	if (File.is_open()) {
 
-		File << type << endl << date.getDate() << endl<<endl;
+		File << type << endl << date.getDate() << endl << endl;
 	}
 
 	File.close();

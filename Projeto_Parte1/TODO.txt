@@ -1,4 +1,5 @@
 TODO.txt
  
  
- COMPLETE ALL CLASSES WITH GETTERS AND SETTERS
+Destrutores
+Ver Date e expDate problemas com operator= no Card.h

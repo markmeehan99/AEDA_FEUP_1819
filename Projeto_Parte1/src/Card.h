@@ -19,14 +19,14 @@ class Card {
 	double credit;
 	Date expDate;
 public:
-	Card(int id, string name, double credit, Date *expDate);
+	Card(int id, string name, double credit, Date expDate);
 	Date getExpDate() const;
 	double getCredit() const;
 	int getID() const;
+	string getName()const;
 	void removeCredit(double amount);
 	void addCredit(double amount);
 };
-
 
 class InvalidAmount{
 public:

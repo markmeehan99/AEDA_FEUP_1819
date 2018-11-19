@@ -10,9 +10,10 @@
 #include "Card.h"
 #include <iostream>
 #include <fstream>
+#include <tuple>
 
 User::User() {
-	// TODO Auto-generated constructor stub
+
 }
 User::User(string name, string email, int age, string address) {
 	this->name = name;
@@ -57,7 +58,7 @@ void User::buyGame(Game *game) {
 
 	for (size_t i = 0; i < games.size(); i++) {
 		if (games.at(i) == game) {
-			cout << "Game already bought" << endl; //criar excep��o
+			cout << "Game already bought" << endl; //criar excepcao
 			return;
 		}
 	}
@@ -69,7 +70,7 @@ void User::buyGame(Game *game) {
 		}
 	}
 	if (c == -1) {
-		cout << "Not enough money" << endl; //criar excep��o
+		cout << "Not enough money" << endl; //criar excepcao
 		return;
 	}
 
@@ -77,14 +78,12 @@ void User::buyGame(Game *game) {
 	games.push_back(game);
 }
 
-void User::importUserInfo()
-{
+void User::importUserInfo() {
 	ifstream is("UserInfoTemplate.txt");
 
 	string name, email, age, address;
 
-	if (is.is_open())
-	{
+	if (is.is_open()) {
 		getline(is, name);
 		getline(is, email);
 		getline(is, age);
@@ -118,8 +117,8 @@ void User::importUserInfo()
 				}
 			}
 		}
-	}
-	else cout << "Nao abriu file" << endl;
+	} else
+		cout << "Nao abriu file" << endl;
 }
 
 void userInfoHeader(User *user) {
@@ -146,8 +145,8 @@ void User::exportUserInfo(char type, Date date, Game game, int playTime) {
 
 	if (File.is_open()) {
 
-		File << type << endl << date.getDate() << endl << "\"" << game.getName()<<"\"" << endl
-				<< playTime << endl << endl;
+		File << type << endl << date.getDate() << endl << "\"" << game.getName()
+				<< "\"" << endl << playTime << endl << endl;
 	}
 
 	File.close();
@@ -165,9 +164,33 @@ void User::exportUserInfo(char type, Date date, Game game) {
 
 	if (File.is_open()) {
 
-	File << type << endl << date.getDate() << endl<< "\"" << game.getName()<<"\"" <<endl;
+		File << type << endl << date.getDate() << endl << "\"" << game.getName()
+				<< "\"" << endl;
+	}
+
+	File.close();
 }
 
-File.close();
+void User::playGame(Game *game, int playTime) {
+
+	if(playTime <= 0){
+		cout << "Invalid playTime" << endl;
+		return;
+	}
+
+	int pos = -1;
+
+	for (size_t i = 0; i < games.size(); i++) {
+		if (games.at(i) == game) {
+			pos = i;
+		}
+	}
+	if (pos == -1) {
+		cout << "Game not bought" << endl;
+		return;
+	}
+
+	playSessions.at(pos).push_back(make_tuple(game, playTime, game->getPlatform()));
+	game->addPlayTime(playTime);
 }
 
