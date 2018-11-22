@@ -39,6 +39,20 @@ public:
 	}
 };
 
+class InvalidCard
+{
+private:
+	string InvCard;
+public:
+	InvalidCard(string card)
+{
+		this->InvCard = card;
+}
+	string getMessage()
+	{
+		return "Card " + InvCard + " does not exist";
+	}
+};
 
 
 #endif /* CARD_H_ */

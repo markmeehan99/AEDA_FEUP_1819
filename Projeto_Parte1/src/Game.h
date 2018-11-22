@@ -41,7 +41,6 @@ public:
 	int getTotalPlayTime() const;
 	void addPlayTime(int playTime);
 	bool changePrice();
-	void buyGame(Game *game);
 	virtual void exportGameInfo(char type, Date date, int playTime); //overload for Updates
 	virtual void exportGameInfo(char type, Date date);
 	void importGameInfo();

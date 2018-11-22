@@ -13,7 +13,10 @@
 #include <tuple>
 
 User::User() {
-
+	this->name = "";
+	this->email = "";
+	this->age = 0;
+	this->address = "";
 }
 User::User(string name, string email, int age, string address) {
 	this->name = name;
@@ -78,8 +81,9 @@ void User::buyGame(Game *game) {
 	games.push_back(game);
 }
 
-void User::importUserInfo() {
-	ifstream is("UserInfoTemplate.txt");
+void User::importUserInfo(string file) {
+	file += ".txt";
+	ifstream is(file);
 
 	string name, email, age, address;
 
@@ -194,3 +198,17 @@ void User::playGame(Game *game, int playTime) {
 	game->addPlayTime(playTime);
 }
 
+void User::removeCard(string card)
+{
+
+	if (cards.empty())
+		throw InvalidCard(card);
+
+	for(unsigned int i = 0; i < cards.size(); i++)
+	{
+		if (cards.at(i)->getName() == card) //found card
+		{
+			cards.erase(cards.begin() + i);
+		}
+	}
+}

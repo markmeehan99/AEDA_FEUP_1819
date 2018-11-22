@@ -47,3 +47,4 @@ void Card::removeCredit(double amount) {
 	credit -= amount;
 }
 
+

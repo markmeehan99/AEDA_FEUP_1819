@@ -25,8 +25,12 @@ class Store {
 public:
 	Store();
 	bool addGame(Game *game);
+	bool addUser(User *u);
+	vector<User*> getAllUser() const;
+	vector<Game*> getAllGames() const;
 	Game* getGame(string gameName);
 	User* getUser(string userName);
+	void changeDate(string date);
 
 };
 

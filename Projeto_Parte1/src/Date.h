@@ -21,12 +21,13 @@ public:
 	Date(string date);
 	string getDate()const;
 	void setDate(int day, int month, int year);
+	void setDate(string date);
 	bool operator>(const Date &d1);
 	void operator=(Date d);
 };
 
 
-class InvalidDate {
+class InvalidDate : public exception {
 private:
 	int day;
 	int month;

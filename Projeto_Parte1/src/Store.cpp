@@ -8,9 +8,9 @@
 #include "Store.h"
 #include <vector>
 
-/*Store::Store() {
+Store::Store() {
 
- }*/
+ }
 
 bool Store::addGame(Game *game) {
 
@@ -22,6 +22,17 @@ bool Store::addGame(Game *game) {
 
 	return true;
 }
+bool Store::addUser(User *u) {
+
+	for (size_t i = 0; i < userList.size(); i++) {
+		if (userList.at(i)->getName() == u->getName())
+			return false;
+	}
+	userList.push_back(u);
+
+	return true;
+}
+
 
 Game* Store::getGame(string gameName) {
 
@@ -33,6 +44,11 @@ Game* Store::getGame(string gameName) {
 	throw NonExistentGame(gameName);
 }
 
+void Store::changeDate(string date){
+	this->date.setDate(date);
+
+}
+
 User* Store::getUser(string userName) {
 	User *u = new User();
 
@@ -42,4 +58,10 @@ User* Store::getUser(string userName) {
 	}
 
 	return u;
+}
+vector<User*> Store::getAllUser() const{
+	return userList;
+}
+vector<Game*> Store::getAllGames() const{
+	return allGames;
 }

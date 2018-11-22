@@ -39,12 +39,13 @@ public:
 
 	void buyGame(Game *game);
 	bool addCard(Card *card);
+	void removeCard (string card);
 
 	void playGame(Game *game, int playTime);
 	void UpdateGame(int playTime);
 
 	void makeReview(Review *review, Game *game); //REVER UTILIDADE DISTO
-	void importUserInfo();
+	void importUserInfo(string file);
 	void exportUserInfo(char type, Date date, Game game, int playTime);
 	void exportUserInfo(char type, Date date, Game game);
 
