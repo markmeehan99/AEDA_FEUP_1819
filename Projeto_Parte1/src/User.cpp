@@ -212,3 +212,7 @@ void User::removeCard(string card)
 		}
 	}
 }
+ostream& operator<<(ostream& sp, User& user){
+	sp << user.getName();
+	return sp;
+}

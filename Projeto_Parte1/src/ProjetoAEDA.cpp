@@ -40,6 +40,7 @@ void addUser() {
 		User *u = new User;
 		u->importUserInfo(file);
 		store.addUser(u);
+		cout << "Utilizador "<< *u<<" adicionado!\n\n";
 	} else if (input == 2) {
 		string name;
 		string email;
@@ -56,8 +57,17 @@ void addUser() {
 		//ADICIONAR TRY/CATCH E CRIAR A EXCEPTION
 		User *u = new User(name, email, age, address);
 		store.addUser(u);
+		cout << "Utilizador "<< *u<<" adicionado!\n\n";
+
 	}
 
+}
+
+void printVector(vector<User*> c){
+
+	for(User* u: c){
+		cout << *u << " ";
+	}
 }
 
 void editData() {
@@ -73,6 +83,7 @@ void editData() {
 	else if (input == 1) {
 		addUser();
 	} else if (input == 2) {
+		printVector(store.getAllUser());
 
 	} else if (input == 3) {
 
@@ -121,8 +132,10 @@ int main() {
 		}
 	}
 
-	cout << store.getAllUser().at(0)->getAddress() << endl;
+	cout << store.getAllUser().at(0)->getName() << endl;
 	cout << store.getAllUser().size();
+	cout <<*store.getAllUser().at(0)<< endl;
+	cout <<*store.getAllUser().at(1)<< endl;
 
 	return 0;
 }

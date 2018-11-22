@@ -45,6 +45,7 @@ public:
 	virtual void exportGameInfo(char type, Date date);
 	void importGameInfo();
 	virtual double getSubscriptionCost() const;
+	friend ostream& operator<<(ostream& sp, Game& game);
 };
 
 #endif /* GAME_H_ */

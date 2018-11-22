@@ -118,3 +118,7 @@ void Game::addPlayTime(int playTime){
 double Game::getSubscriptionCost() const{
 
 }
+ostream& operator<<(ostream& sp, Game& game){
+	sp << game.getName();
+	return sp;
+}

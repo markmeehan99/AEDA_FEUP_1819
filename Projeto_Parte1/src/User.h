@@ -49,6 +49,7 @@ public:
 	void exportUserInfo(char type, Date date, Game game, int playTime);
 	void exportUserInfo(char type, Date date, Game game);
 
+	friend ostream& operator<<(ostream& sp, User& user);
 };
 
 #endif /* USER_H_ */
