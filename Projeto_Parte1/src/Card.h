@@ -26,6 +26,7 @@ public:
 	string getName()const;
 	void removeCredit(double amount);
 	void addCredit(double amount);
+	friend ostream& operator<<(ostream& sp, Card& card);
 };
 
 class InvalidAmount{

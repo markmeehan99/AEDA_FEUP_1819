@@ -37,9 +37,9 @@ public:
 	vector<Game*> getGames() const;
 	vector<Card*> getCards() const;
 	Game* getGame(string gameName) const;
-
-	void buyGame(Game *game);
-	bool addCard(Card *card);
+	Card* getCard(string cardName) const;
+	void buyGame(Game *game, Card* card);
+	void addCard(Card *card);
 	void removeCard(string card);
 
 	void playGame(string gameName, int playTime);

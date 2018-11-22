@@ -48,3 +48,11 @@ void Card::removeCredit(double amount) {
 }
 
 
+ostream& operator<<(ostream& sp, Card& card){
+	string p = ": ";
+	string e = " euros";
+	sp << card.getName()<< p << to_string(card.getCredit())<< e;
+
+	return sp;
+}
+

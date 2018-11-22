@@ -46,18 +46,17 @@ vector<Card*> User::getCards() const {
 	return cards;
 }
 
-bool User::addCard(Card *card) {
+void User::addCard(Card *card) {
 
 	for (size_t i = 0; i < cards.size(); i++) {
 		if (cards.at(i) == card)
-			return false;
+			throw InvalidCard(card->getName());
 	}
 
 	cards.push_back(card);
-	return true;
 }
 
-void User::buyGame(Game *game) {
+void User::buyGame(Game *game, Card* card) {
 
 	for (size_t i = 0; i < games.size(); i++) {
 		if (games.at(i) == game) {
@@ -66,18 +65,12 @@ void User::buyGame(Game *game) {
 		}
 	}
 
-	int c = -1;
-	for (size_t i = 0; i < cards.size(); i++) {
-		if (game->getPrice() < cards.at(i)->getCredit()) {
-			c = i;
-		}
-	}
-	if (c == -1) {
+	if (game->getPrice() < card->getCredit()) {
 		cout << "Not enough money" << endl; //criar excepcao
 		return;
 	}
 
-	cards.at(c)->removeCredit(game->getPrice());
+	card->removeCredit(game->getPrice());
 	games.push_back(game);
 }
 
@@ -205,61 +198,74 @@ void User::removeCard(string card) {
 		throw InvalidCard(card);
 
 	for (unsigned int i = 0; i < cards.size(); i++) {
-		if (cards.at(i)->getName() == card) //found card
-				{
+		if (cards.at(i)->getName() == card){
 			cards.erase(cards.begin() + i);
+			return;
 		}
 	}
+	throw InvalidCard(card);
 }
 
 bool User::isUpdated(string gameName) {
 	string file = gameName;
-		file += ".txt";
-		ifstream is(file);
-		string date;
-		if (is.is_open()) {
-			string temp;
-			getline(is, temp);
-			getline(is, temp);
-			getline(is, temp);
-			getline(is, temp);
-			getline(is, temp);
+	file += ".txt";
+	ifstream is(file);
+	string date;
+	if (is.is_open()) {
+		string temp;
+		getline(is, temp);
+		getline(is, temp);
+		getline(is, temp);
+		getline(is, temp);
+		getline(is, temp);
 
-			string ignore, type, game, no_hours, lastUpdate = 0;
+		string ignore, type, game, no_hours, lastUpdate = 0;
 
-			//Import user info
-			while (!is.eof()) {
-				getline(is, type); //TRATAR)
-				getline(is, date);
-				getline(is, game);
-				getline(is, no_hours);
-				getline(is, ignore);
+		//Import user info
+		while (!is.eof()) {
+			getline(is, type); //TRATAR)
+			getline(is, date);
+			getline(is, game);
+			getline(is, no_hours);
+			getline(is, ignore);
 
-				if (type == "U" && game == gameName) {
-					lastUpdate = date;
-				}
+			if (type == "U" && game == gameName) {
+				lastUpdate = date;
 			}
-		} else {
-			cout << "Nao abriu o ficheiro" << endl;
-			return true;
 		}
-		Date a(date);
+	} else {
+		cout << "Nao abriu o ficheiro" << endl;
+		return true;
+	}
+	Date a(date);
 
-		if(this->getGame(gameName)->getLastUpdate() > a){
-			return false;
-		} else return true;
+	if (this->getGame(gameName)->getLastUpdate() > a) {
+		return false;
+	} else
+		return true;
 
 }
 
-Game* User::getGame(string gameName) const{
+Game* User::getGame(string gameName) const {
 	for (size_t i = 0; i < games.size(); i++) {
-			if (games.at(i)->getName() == gameName) {
-				return games.at(i);
-			}
+		if (games.at(i)->getName() == gameName) {
+			return games.at(i);
 		}
+	}
 	throw Game::NonExistentGame(gameName);
 
 }
+
+Card* User::getCard(string cardName) const {
+
+	for (size_t i = 0; i < cards.size(); i++) {
+		if (cards.at(i)->getName() < cardName) {
+			return cards.at(i);
+		}
+	}
+	throw InvalidCard(cardName);
+}
+
 ostream& operator<<(ostream& sp, User& user) {
 	sp << user.getName();
 	return sp;

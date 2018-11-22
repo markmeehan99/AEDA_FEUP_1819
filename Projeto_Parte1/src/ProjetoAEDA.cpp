@@ -48,6 +48,16 @@ void printVector(vector<Game*> c) {
 	}
 	cout << endl;
 }
+void printVector(vector<Card*> c) {
+	int counter = 0;
+	for (Card* u : c) {
+		if (counter % 3 == 0)
+			cout << endl;
+		cout << *u << "\t";
+		counter++;
+	}
+	cout << endl;
+}
 
 void addUser() {
 	cout << "Adicionar utilizador por ficheiro(1) ou criar utilizador(2)? "
@@ -95,119 +105,182 @@ void removeUser() {
 	cout << "Utilizador " << name << " eliminado!\n\n";
 }
 
-void updateGame(string userName,string gameName) {
-	if(!store.getUser(userName)->isUpdated(gameName)){
-		store.getUser(userName)->exportUserInfo('U',store.getDate(),*store.getGame(gameName));
-		cout << "Game " << gameName << "was updated!\n";
+void userUpdateGame(string userName, string gameName) {
+	if (!store.getUser(userName)->isUpdated(gameName)) {
+		store.getUser(userName)->exportUserInfo('U', store.getDate(),
+				*store.getGame(gameName));
+		cout << "O jogo " << gameName << "foi atualziado!\n\n";
 	}
 }
 
-void alterUser() { //INSERIR TRY/CATCH
-printVector(store.getAllUser());
-cout << "\nQual utilizador pretende alterar? Insira 0 para cancelar\n";
-string userName;
-string gameName;
-cin >> userName;
-if (userName == "0")
-	return;
-cout << "\nO que pretende fazer?\n0-Voltar ao inicio\n1-Jogar jogo\n"
-		"2-Atualizar jogo\n3-Comprar jogo\n"
-		"4-Adicionar cartao\n5-Remover cartao\n";
-int input;
-cin >> input;
-if (input == 0) {
-	return;
+bool checkCardDate(Card* c) {
+	if (store.getDate() > c->getExpDate()) {
+		return false;
+	} else
+		return true;
+
 }
-if (input == 1) {
+void userBuyGame(string userName, string gameName, string cardName) {
+	if (checkCardDate(store.getUser(userName)->getCard(cardName))) //TRY/CATCH
+		store.getUser(userName)->buyGame(store.getGame(gameName),
+				store.getUser(userName)->getCard(cardName));
+}
+
+void userAddCard(string userName) { //TODO: VALIDAR INPUTS
+	int id;
+	string name;
+	double credit;
+	string expDate;
+	cout << "Introduza a informacao do cartao:\nCard name: ";
+	cin >> name;
+	cout << "ID do cartão: ";
+	cin >> id;
+	cout << "Credito disponivel: ";
+	cin >> credit;
+	cout << "Data de validade(dd/mm/aa): ";
+	cin >> expDate;
+	Date d(expDate);
+	Card *c = new Card(id, name, credit, expDate);
+	store.getUser(userName)->addCard(c);
+	cout << "Cartão adicionado com sucesso!\n\n";
+}
+
+void userRemoveCard(string userName, string cardName) { //TODO: TRY/CATCH
+
+	store.getUser(userName)->removeCard(cardName);
+
+}
+void alterUser() { //TODO: INSERIR TRY/CATCH
 	printVector(store.getAllUser());
-	cout << "\nQual jogo quer jogar? Insira 0 para cancelar\n";
-	cin >> gameName;
-	if (gameName == "0")
+	cout << "\nQual utilizador pretende alterar? Insira 0 para cancelar\n";
+	string userName;
+	string gameName;
+	string cardName;
+	cin >> userName;
+	if (userName == "0")
 		return;
-	cout << "\nDurante quanto tempo?\n";
-	int t;
-	cin >> t;
-	store.getUser(userName)->playGame(gameName, t);
-	store.getUser(userName)->exportUserInfo('P', store.getDate(),
-			*store.getGame(gameName), t);
-	store.getGame(gameName)->exportGameInfo('P', store.getDate(), t);
-}
-if (input == 2) {
-	printVector(store.getAllUser());
-	cout << "\nQual jogo quer atualizar? Insira 0 para cancelar\n";
-	cin >> gameName;
-	if (gameName == "0")
+	cout << "\nO que pretende fazer?\n0-Voltar ao inicio\n1-Jogar jogo\n"
+			"2-Atualizar jogo\n3-Comprar jogo\n"
+			"4-Adicionar cartao\n5-Remover cartao\n";
+	int input;
+	cin >> input;
+	if (input == 0) {
 		return;
-	updateGame(userName, gameName);
+	}
+	if (input == 1) {
+		printVector(store.getAllUser());
+		cout << "\nQual jogo quer jogar? Insira 0 para cancelar\n";
+		cin >> gameName;
+		if (gameName == "0")
+			return;
+		cout << "\nDurante quanto tempo?\n";
+		int t;
+		cin >> t;
+		store.getUser(userName)->playGame(gameName, t);
+		store.getUser(userName)->exportUserInfo('P', store.getDate(),
+				*store.getGame(gameName), t);
+		store.getGame(gameName)->exportGameInfo('P', store.getDate(), t);
+	} else if (input == 2) {
+		printVector(store.getUser(userName)->getGames());
+		cout << "\nQual jogo quer atualizar? Insira 0 para cancelar\n";
+		cin >> gameName;
+		if (gameName == "0")
+			return;
+		userUpdateGame(userName, gameName);
+	} else if (input == 3) {
+		printVector(store.getAllGames());
+		cout << "\nQual jogo quer comprar? Insira 0 para cancelar\n";
+		cin >> gameName;
+		if (gameName == "0")
+			return;
+		printVector(store.getUser(userName)->getCards());
+		cout << "\nCom qual cartão? Insira 0 para cancelar\n";
+		cin >> cardName;
+		if (cardName == "0")
+			return;
+		userBuyGame(userName, gameName, cardName);
+	} else if (input == 4) {
+		userAddCard(userName);
+	} else if (input == 5) {
+		printVector(store.getUser(userName)->getCards());
+		cout << "\nQual cartao pretende remover? Insira 0 para cancelar\n";
+		cin >> cardName;
+		if (cardName == "0")
+			return;
+		userRemoveCard(userName, cardName);
+	}
 }
+
+void addGame(){
+
 }
 
 void editData() {
-cout << "\nO que pretende fazer?\n0-Voltar ao inicio\n"
-		"1-Adicionar utilizador\n2-Retirar utilizador\n"
-		"3-Alterar utilizador\n4-Adicionar jogo a loja\n"
-		"5-Alterar Jogo\n6-Mudar a data\n";
-cout << "Opção:";
-int input;
-cin >> input;
-if (input == 0)
-	return;
-else if (input == 1) {
-	addUser();
-} else if (input == 2) {
-	removeUser();
-} else if (input == 3) {
-	alterUser();
-} else if (input == 4) {
+	cout << "\nO que pretende fazer?\n0-Voltar ao inicio\n"
+			"1-Adicionar utilizador\n2-Retirar utilizador\n"
+			"3-Alterar utilizador\n4-Adicionar jogo a loja\n"
+			"5-Alterar Jogo\n6-Mudar a data\n";
+	cout << "Opção:";
+	int input;
+	cin >> input;
+	if (input == 0)
+		return;
+	else if (input == 1) {
+		addUser();
+	} else if (input == 2) {
+		removeUser();
+	} else if (input == 3) {
+		alterUser();
+	} else if (input == 4) {
+		addGame();
+	} else if (input == 5) {
 
-} else if (input == 5) {
-
-} else if (input == 6) {
-	string d;
-	cout << "Escreva a data(dd/mm/aa):\n";
-	cin >> d;
-	store.changeDate(d);
-} else {
-	cout << "Opcao invalida!\n\n";
-	editData();
-}
+	} else if (input == 6) {
+		string d;
+		cout << "Escreva a data(dd/mm/aa):\n";
+		cin >> d;
+		store.changeDate(d);
+	} else {
+		cout << "Opcao invalida!\n\n";
+		editData();
+	}
 }
 
 void t() {
-string file;
-cout << "Qual é o nome do ficheiro(sem o .txt)?\n";
-cin >> file;
-User *u = new User();
-u->importUserInfo(file);
-store.addUser(u);
+	string file;
+	cout << "Qual é o nome do ficheiro(sem o .txt)?\n";
+	cin >> file;
+	User *u = new User();
+	u->importUserInfo(file);
+	store.addUser(u);
 
 }
 int main() {
 
-cout << "!!!Buenos Dias Matosinhos!!!\n" << endl;
+	cout << "!!!Buenos Dias Matosinhos!!!\n" << endl;
 
-int input;
-while (true) {
-	cout << "O que pretende fazer?\n1-Editar Dados\n2-Ver Dados\n3-Sair\n";
-	cout << "Opcao: ";
-	cin >> input;
-	if (input == 1) {
-		editData();
-	} else if (input == 2) {
-		viewData();
-	} else if (input == 3) {
-		break;
-	} else {
-		cout << "Opcao invalida!\n\n";
-		continue;
+	int input;
+	while (true) {
+		cout << "O que pretende fazer?\n1-Editar Dados\n2-Ver Dados\n3-Sair\n";
+		cout << "Opcao: ";
+		cin >> input;
+		if (input == 1) {
+			editData();
+		} else if (input == 2) {
+			viewData();
+		} else if (input == 3) {
+			break;
+		} else {
+			cout << "Opcao invalida!\n\n";
+			continue;
+		}
 	}
-}
 
-/*cout << store.getAllUser().at(0)->getName() << endl;
- cout << store.getAllUser().size();
- cout << *store.getAllUser().at(0) << endl;
- cout << *store.getAllUser().at(1) << endl;*/
+	/*cout << store.getAllUser().at(0)->getName() << endl;
+	 cout << store.getAllUser().size();
+	 cout << *store.getAllUser().at(0) << endl;
+	 cout << *store.getAllUser().at(1) << endl;*/
 
-return 0;
+	return 0;
 }
 
