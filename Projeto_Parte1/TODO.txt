@@ -2,4 +2,6 @@ TODO.txt
  
  
 Destrutores
-Ver Date e expDate problemas com operator= no Card.h
+VALIDAR INPUTS
+se o indice nao existir voltar para o inicio ou pedir de novo
+ aceitar um 0 para voltar ao inicio

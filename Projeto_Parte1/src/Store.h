@@ -26,19 +26,24 @@ public:
 	Store();
 	bool addGame(Game *game);
 	bool addUser(User *u);
+	void removeUser(string userName);
 	vector<User*> getAllUser() const;
 	vector<Game*> getAllGames() const;
 	Game* getGame(string gameName);
 	User* getUser(string userName);
+	Date getDate() const;
 	void changeDate(string date);
 
+
 };
 
-class NonExistentGame{
+
+class NonExistentUser{
 	string name;
 public:
-	NonExistentGame(string name){this->name = name;}
+	NonExistentUser(string name){this->name = name;}
 	string getName(){return name;}
 };
+
 
 #endif /* STORE_H_ */

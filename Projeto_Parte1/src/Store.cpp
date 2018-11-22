@@ -41,7 +41,7 @@ Game* Store::getGame(string gameName) {
 			return allGames.at(i);
 	}
 
-	throw NonExistentGame(gameName);
+	throw Game::NonExistentGame(gameName);
 }
 
 void Store::changeDate(string date){
@@ -64,4 +64,19 @@ vector<User*> Store::getAllUser() const{
 }
 vector<Game*> Store::getAllGames() const{
 	return allGames;
+}
+
+void Store::removeUser(string userName){
+
+	for (size_t i = 0; i < userList.size(); i++) {
+		if (userList.at(i)->getName() == userName){
+			userList.erase(userList.begin()+i);
+			return;
+		}
+	}
+	throw NonExistentUser(userName);
+}
+
+Date Store::getDate() const{
+	return date;
 }

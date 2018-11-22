@@ -100,7 +100,7 @@ void Game::exportGameInfo(char type, Date date) {
 
 	if (File.is_open()) {
 
-		File << type << endl << date.getDate() << endl<<endl;
+		File << type << endl << date.getDate() << "ignorar linha"<< endl<<endl;
 	}
 
 	File.close();
@@ -121,4 +121,9 @@ double Game::getSubscriptionCost() const{
 ostream& operator<<(ostream& sp, Game& game){
 	sp << game.getName();
 	return sp;
+}
+
+
+Date Game::getLastUpdate() const{
+	return lastUpdate;
 }

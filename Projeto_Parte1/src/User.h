@@ -36,13 +36,14 @@ public:
 	string getAddress() const;
 	vector<Game*> getGames() const;
 	vector<Card*> getCards() const;
+	Game* getGame(string gameName) const;
 
 	void buyGame(Game *game);
 	bool addCard(Card *card);
-	void removeCard (string card);
+	void removeCard(string card);
 
-	void playGame(Game *game, int playTime);
-	void UpdateGame(int playTime);
+	void playGame(string gameName, int playTime);
+	bool isUpdated(string gameName);
 
 	void makeReview(Review *review, Game *game); //REVER UTILIDADE DISTO
 	void importUserInfo(string file);

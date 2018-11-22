@@ -175,9 +175,9 @@ void User::exportUserInfo(char type, Date date, Game game) {
 	File.close();
 }
 
-void User::playGame(Game *game, int playTime) {
+void User::playGame(string gameName, int playTime) {
 
-	if(playTime <= 0){
+	if (playTime <= 0) {
 		cout << "Invalid playTime" << endl;
 		return;
 	}
@@ -185,7 +185,7 @@ void User::playGame(Game *game, int playTime) {
 	int pos = -1;
 
 	for (size_t i = 0; i < games.size(); i++) {
-		if (games.at(i) == game) {
+		if (games.at(i)->getName() == gameName) {
 			pos = i;
 		}
 	}
@@ -194,25 +194,73 @@ void User::playGame(Game *game, int playTime) {
 		return;
 	}
 
-	playSessions.at(pos).push_back(make_tuple(game, playTime, game->getPlatform()));
-	game->addPlayTime(playTime);
+	playSessions.at(pos).push_back(
+			make_tuple(games.at(pos), playTime, games.at(pos)->getPlatform()));
+	games.at(pos)->addPlayTime(playTime);
 }
 
-void User::removeCard(string card)
-{
+void User::removeCard(string card) {
 
 	if (cards.empty())
 		throw InvalidCard(card);
 
-	for(unsigned int i = 0; i < cards.size(); i++)
-	{
+	for (unsigned int i = 0; i < cards.size(); i++) {
 		if (cards.at(i)->getName() == card) //found card
-		{
+				{
 			cards.erase(cards.begin() + i);
 		}
 	}
 }
-ostream& operator<<(ostream& sp, User& user){
+
+bool User::isUpdated(string gameName) {
+	string file = gameName;
+		file += ".txt";
+		ifstream is(file);
+		string date;
+		if (is.is_open()) {
+			string temp;
+			getline(is, temp);
+			getline(is, temp);
+			getline(is, temp);
+			getline(is, temp);
+			getline(is, temp);
+
+			string ignore, type, game, no_hours, lastUpdate = 0;
+
+			//Import user info
+			while (!is.eof()) {
+				getline(is, type); //TRATAR)
+				getline(is, date);
+				getline(is, game);
+				getline(is, no_hours);
+				getline(is, ignore);
+
+				if (type == "U" && game == gameName) {
+					lastUpdate = date;
+				}
+			}
+		} else {
+			cout << "Nao abriu o ficheiro" << endl;
+			return true;
+		}
+		Date a(date);
+
+		if(this->getGame(gameName)->getLastUpdate() > a){
+			return false;
+		} else return true;
+
+}
+
+Game* User::getGame(string gameName) const{
+	for (size_t i = 0; i < games.size(); i++) {
+			if (games.at(i)->getName() == gameName) {
+				return games.at(i);
+			}
+		}
+	throw Game::NonExistentGame(gameName);
+
+}
+ostream& operator<<(ostream& sp, User& user) {
 	sp << user.getName();
 	return sp;
 }
