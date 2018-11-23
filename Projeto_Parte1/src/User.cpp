@@ -58,7 +58,7 @@ void User::buyGame(Game *game, Card* card) {
 		}
 	}
 
-	if (game->getPrice() < card->getCredit()) {
+	if (game->getPrice() > card->getCredit()) {
 		cout << "Not enough money" << endl; //criar excepcao
 		return;
 	}
@@ -252,7 +252,7 @@ Game* User::getGame(string gameName) const {
 Card* User::getCard(string cardName) const {
 
 	for (size_t i = 0; i < cards.size(); i++) {
-		if (cards.at(i)->getName() < cardName) {
+		if (cards.at(i)->getName() == cardName) {
 			return cards.at(i);
 		}
 	}

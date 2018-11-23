@@ -59,17 +59,17 @@ void viewGameinfo() {
 	cout << "Nome do jogo: \n";
 	string gamename;
 	cin >> gamename;
-	cout << "Game preco: " << store.getGame(gamename)->getPrice() << endl;
-	cout << "Game ID: " << store.getGame(gamename)->getID() << endl;
-	cout << "Game idade limite: " << store.getGame(gamename)->getAgeLimit()
+	cout << "Preco: " << store.getGame(gamename)->getPrice() << endl;
+	cout << "ID: " << store.getGame(gamename)->getID() << endl;
+	cout << "Idade limite: " << store.getGame(gamename)->getAgeLimit()
 			<< endl;
-	cout << "Game ratings: " << store.getGame(gamename)->getRating() << endl;
-	cout << "Game platforma: " << store.getGame(gamename)->getPlatform()
+	cout << "Ratings: " << store.getGame(gamename)->getRating() << endl;
+	cout << "Platforma: " << store.getGame(gamename)->getPlatform()
 			<< endl;
-	cout << "Game publicador: " << store.getGame(gamename)->getName() << endl;
-	cout << "Game tempo jogado por todos os users: "
+	cout << "Publicador: " << store.getGame(gamename)->getName() << endl;
+	cout << "Tempo jogado por todos os users: "
 			<< store.getGame(gamename)->getTotalPlayTime() << endl;
-	cout << "Game categoria: " << store.getGame(gamename)->getGenre() << endl;
+	cout << "Categoria: " << store.getGame(gamename)->getGenre() << endl;
 }
 
 void viewGames() {
@@ -399,11 +399,23 @@ void addGame() {
 
 }
 
+void updateGame(){
+	string name;
+	printVector(store.getAllUser());
+	cout << "Nome do jogo: ";
+	cin >> name;
+
+	store.getGame(name)->update(store.getDate());
+	cout << "o Jogo foi atualizado. \n";
+
+}
+
+
 void editData() {
 	cout << "\nO que pretende fazer?\n0-Voltar ao inicio\n"
 			"1-Adicionar utilizador\n2-Retirar utilizador\n"
 			"3-Alterar utilizador\n4-Adicionar jogo a loja\n"
-			"5-Alterar Jogo\n6-Mudar a data\n";
+			"5-Atualizar Jogo\n6-Mudar a data\n";
 	cout << "Opcao:";
 	int input;
 	cin >> input;
@@ -418,7 +430,7 @@ void editData() {
 	} else if (input == 4) {
 		addGame();
 	} else if (input == 5) {
-
+		updateGame();
 	} else if (input == 6) {
 		string d;
 		cout << "Escreva a data(dd/mm/aa):\n";

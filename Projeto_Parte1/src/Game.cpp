@@ -132,3 +132,8 @@ bool Game::operator<(const Game& other){
 void Game::importGameInfo(string file){
 
 }
+
+
+void Game::update(Date date){
+	this->lastUpdate = date;
+}

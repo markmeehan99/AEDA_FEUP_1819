@@ -96,7 +96,7 @@ double Store::averageCost() const{
 vector<Game*> Store::printsorted() const{
 	vector <Game*> temp = allGames;
 
-	/*for (unsigned int j = 0; j < temp.size() - 1; ++j) {
+	for (unsigned int j = 0; j < temp.size() - 1; ++j) {
 
 	    int min = j;
 	    for (unsigned int i = j+1; i < temp.size(); ++i) {
@@ -110,5 +110,5 @@ vector<Game*> Store::printsorted() const{
 	}
 
 
-	return temp;*/
+	return temp;
 }
