@@ -8,7 +8,8 @@
 using namespace std;
 
 class Game {
-private:
+protected:
+	static int ID;
 	int age_limit = 0;
 	int id;
 	string name;
@@ -18,8 +19,9 @@ private:
 	string genre;
 	string publisher;
 	int totalPlaytime = 0;
-	Date lastUpdate = Date(1, 1, 00);
+	Date lastUpdate = Date(1, 1, 1);
 public:
+	Game();
 	Game(int age_limit, string name, double price, int rating, string platform,
 			string genre, string publisher);
 	string getName() const;
@@ -36,7 +38,7 @@ public:
 	bool changePrice();
 	virtual void exportGameInfo(char type, Date date, int playTime); //overload for Updates
 	virtual void exportGameInfo(char type, Date date);
-	void importGameInfo();
+	virtual void importGameInfo(string file);
 	virtual double getSubscriptionCost() const;
 	friend ostream& operator<<(ostream& sp, Game& game);
   bool operator<(const Game& other);

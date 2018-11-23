@@ -2,6 +2,9 @@
 #include <string>
 
 Date::Date() {
+	this->day = 1;
+	this-> month = 1;
+	this->year = 00;
 }
 
 Date::Date(int day, int month, int year) {

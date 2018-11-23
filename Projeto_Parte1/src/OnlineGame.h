@@ -11,6 +11,7 @@ private:
 	bool isMonthly;
 	double subscriptionCost;
 public:
+	OnlineGame();
 	OnlineGame(int age_limit, string name, double price, int rating,
 			string platform, string genre, string publisher,
 			double subscriptionCost, bool isMonthly);
@@ -18,7 +19,7 @@ public:
 	double getSubscriptionCost() const;
 	void exportGameInfo(char type, Date date, int playTime); //overload for Updates
 	void exportGameInfo(char type, Date date);
-
+	void importGameInfo(string file);
 };
 
 #endif /* ONLINEGAME_H_ */

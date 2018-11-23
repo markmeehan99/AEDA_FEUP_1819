@@ -11,34 +11,36 @@
 using namespace std;
 
 class Store {
-  vector<User*> userList;
-  vector<Game*> allGames;
-  Date date;
+	vector<User*> userList;
+	vector<Game*> allGames;
+	Date date = Date(2, 2, 2);
 
 public:
-  Store();
-  bool addGame(Game *game);
-  bool addUser(User *u);
-  void removeUser(string userName);
-  vector<User*> getAllUser() const;
-  vector<Game*> getAllGames() const;
-  Game* getGame(string gameName);
-  User* getUser(string userName);
-  Date getDate() const;
-  void changeDate(string date);
-  int averageGames() const;
-  double averageCost() const;
-  vector<Game*> printsorted() const;
+	Store();
+	bool addGame(Game *game);
+	bool addUser(User *u);
+	void removeUser(string userName);
+	vector<User*> getAllUser() const;
+	vector<Game*> getAllGames() const;
+	Game* getGame(string gameName);
+	User* getUser(string userName);
+	Date getDate() const;
+	void changeDate(string date);
+	int averageGames() const;
+	double averageCost() const;
+	vector<Game*> printsorted() const;
 
 };
 
-
-class NonExistentUser{
-  string name;
+class NonExistentUser {
+	string name;
 public:
-  NonExistentUser(string name){this->name = name;}
-  string getName(){return name;}
+	NonExistentUser(string name) {
+		this->name = name;
+	}
+	string getName() {
+		return name;
+	}
 };
-
 
 #endif /* STORE_H_ */

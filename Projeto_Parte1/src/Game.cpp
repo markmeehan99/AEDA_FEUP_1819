@@ -3,9 +3,13 @@
 #include <string>
 #include <fstream>
 
-static int ID = 0;
+int Game::ID = 0;
 
 bool empty(std::fstream& pFile);
+
+Game::Game(){
+
+}
 
 Game::Game(int age_limit, string name, double price, int rating, string platform,
 		string genre, string publisher) {
@@ -84,7 +88,7 @@ void Game::exportGameInfo(char type, Date date, int playTime) {
 void Game::exportGameInfo(char type, Date date) {
 
 	if (type != 'U')
-		cout << "Invalid info type" << endl;
+		cout << "Tipo de informacao invalido" << endl;
 
 	gameInfoHeader(this);
 
@@ -93,10 +97,11 @@ void Game::exportGameInfo(char type, Date date) {
 
 	if (File.is_open()) {
 
-		File << type << endl << date.getDate() << "ignorar linha"<< endl<<endl;
+		File << type << endl << date.getDate() << "***Ignorar linha***"<< endl<<endl;
 	}
 
 	File.close();
+	this->lastUpdate = date;
 }
 
 int Game::getTotalPlayTime() const {
@@ -122,4 +127,8 @@ Date Game::getLastUpdate() const{
 
 bool Game::operator<(const Game& other){
 	return (this->name < other.getName());
+}
+
+void Game::importGameInfo(string file){
+
 }
