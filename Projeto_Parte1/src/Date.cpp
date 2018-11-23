@@ -3,19 +3,19 @@
 
 Date::Date() {
 	this->day = 1;
-	this-> month = 1;
+	this->month = 1;
 	this->year = 00;
 }
 
 Date::Date(int day, int month, int year) {
-	setDate(day,month,year);
+	setDate(day, month, year);
 }
 
 Date::Date(string date) {
 	int d = stoi(date.substr(0, 2));
 	int m = stoi(date.substr(3, 2));
 	int y = stoi(date.substr(6, 2));
-	setDate(d,m,y);
+	setDate(d, m, y);
 }
 
 string Date::getDate() const {
@@ -114,79 +114,13 @@ void Date::setDate(int day, int month, int year) {
 	}
 }
 
-void Date::setDate(string date){
-	bool InvDate = false; //If date is invalid
-
-	//Checks year
-	if (year <= 0)
-		InvDate = true;
-
-	//Checks month and respective day
-	switch (month) {
-	case 1:
-		if (day < 1 || day > 31)
-			InvDate = false;
-		break;
-	case 2:
-		if (year % 4 == 0) //ano bissexto
-			if (day < 1 || day > 29)
-				InvDate = false;
-			else if (day < 1 || day > 28)
-				InvDate = false;
-		break;
-	case 3:
-		if (day < 1 || day > 31)
-			InvDate = false;
-		break;
-	case 4:
-		if (day < 1 || day > 30)
-			InvDate = false;
-		break;
-	case 5:
-		if (day < 1 || day > 31)
-			InvDate = false;
-		break;
-	case 6:
-		if (day < 1 || day > 30)
-			InvDate = false;
-		break;
-	case 7:
-		if (day < 1 || day > 31)
-			InvDate = false;
-		break;
-	case 8:
-		if (day < 1 || day > 31)
-			InvDate = false;
-		break;
-	case 9:
-		if (day < 1 || day > 30)
-			InvDate = false;
-		break;
-	case 10:
-		if (day < 1 || day > 31)
-			InvDate = false;
-		break;
-	case 11:
-		if (day < 1 || day > 30)
-			InvDate = false;
-		break;
-	case 12:
-		if (day < 1 || day > 31)
-			InvDate = false;
-		break;
-	}
-
-	//If date is invalid, throws exception
-	if (InvDate)
-		throw InvalidDate(day, month, year);
-	else {
-		this->day = day;
-		this->month = month;
-		this->year = year;
-	}
+void Date::setDate(string date) {
+	int d = stoi(date.substr(0, 2));
+	int m = stoi(date.substr(3, 2));
+	int y = stoi(date.substr(6, 2));
+	setDate(d, m, y);
 
 }
-
 
 void Date::operator=(Date d) {
 

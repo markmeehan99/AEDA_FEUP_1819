@@ -3,7 +3,7 @@
 #include <fstream>
 #include <iostream>
 
-OnlineGame::OnlineGame(){
+OnlineGame::OnlineGame() {
 
 }
 
@@ -112,13 +112,13 @@ void OnlineGame::importGameInfo(string file) {
 
 		/*string temp;
 
-		getline(is, temp);
-		getline(is, temp);
+		 getline(is, temp);
+		 getline(is, temp);
 
-		string ignore, type, date, game, no_hours;
+		 string ignore, type, date, game, no_hours;
 
-		//Import user info
-		/*while (!is.eof()) {
+		 //Import user info
+		 while (!is.eof()) {
 		 getline(is, type); //TRATAR)
 		 getline(is, date);
 		 getline(is, game);

@@ -1,0 +1,28 @@
+var searchData=
+[
+  ['game',['Game',['../class_game.html',1,'Game'],['../class_game.html#ad59df6562a58a614fda24622d3715b65',1,'Game::Game()'],['../class_game.html#a18ec1e764b12f04af52118d304a5a0be',1,'Game::Game(int age_limit, string name, double price, int rating, string platform, string genre, string publisher)']]],
+  ['getage',['getAge',['../class_user.html#a71385d4c5a3a509af5024b3c8e1e1aa9',1,'User']]],
+  ['getagelimit',['getAgeLimit',['../class_game.html#a5b2daf35a982407c401dece57d6b9a9a',1,'Game']]],
+  ['getallgames',['getAllGames',['../class_store.html#a7a678ca8f7dfe67bba0770a3fd14dbd8',1,'Store']]],
+  ['getalluser',['getAllUser',['../class_store.html#a8a7e05e2d96bd7c77c3e941f955aff15',1,'Store']]],
+  ['getcard',['getCard',['../class_user.html#aba0fc220983530ed9849886eaff62e58',1,'User']]],
+  ['getcards',['getCards',['../class_user.html#a64a0db8b31c7abc5678329d945f124d3',1,'User']]],
+  ['getcredit',['getCredit',['../class_card.html#aac694e4a97430c5c7bbf35a86c42c4cc',1,'Card']]],
+  ['getdate',['getDate',['../class_date.html#ac33192f734973548e97e9b5d8da44a5b',1,'Date::getDate()'],['../class_store.html#a240054dbd9a3bfa25586608a11c3740b',1,'Store::getDate()']]],
+  ['getemail',['getEmail',['../class_user.html#a4c647e583bd964f40f687776a0d185dc',1,'User']]],
+  ['getexpdate',['getExpDate',['../class_card.html#a1c4eef79a0ecfe991b14a018ceaba6e5',1,'Card']]],
+  ['getgame',['getGame',['../class_store.html#a5843d98fa1b02ef2503d74777c58d64b',1,'Store::getGame()'],['../class_user.html#abb2cc4f7ad5f1dcc2588558f0dafbfd4',1,'User::getGame()']]],
+  ['getgames',['getGames',['../class_user.html#acb8774478acdca7166f7c03152c37ddf',1,'User']]],
+  ['getgenre',['getGenre',['../class_game.html#a15c50d96cdc0d10c3ddb6facae49ab7d',1,'Game']]],
+  ['getid',['getID',['../class_card.html#a497ecf1f76bf92769b352567bebe72b6',1,'Card::getID()'],['../class_game.html#a98a7aa86d555c75bd38b75e98f5d15fd',1,'Game::getID()']]],
+  ['getlastupdate',['getLastUpdate',['../class_game.html#afec9da2f992614e7da064efffb0bde58',1,'Game']]],
+  ['getname',['getName',['../class_card.html#af55a26a3702ab270b03af2e887029bf2',1,'Card::getName()'],['../class_game.html#aed02432a1d47a4e417cce8f06d302030',1,'Game::getName()'],['../class_user.html#ab9b2b5feb6bdd1582696eb6d44cee384',1,'User::getName()']]],
+  ['getpaymentmethod',['getPaymentMethod',['../class_online_game.html#a316be7774509306d80e5b760f6d0959e',1,'OnlineGame']]],
+  ['getplatform',['getPlatform',['../class_game.html#a73871a317b72218bd1a864328bf49a08',1,'Game']]],
+  ['getprice',['getPrice',['../class_game.html#aa2857fecc14b2395535a4c3d3467efb0',1,'Game']]],
+  ['getpublisher',['getPublisher',['../class_game.html#aba3a4283cb0f63643460e2de4f15cd05',1,'Game']]],
+  ['getrating',['getRating',['../class_game.html#ae9cbebe52a4ad6257eb82daf12b3a585',1,'Game']]],
+  ['getsubscriptioncost',['getSubscriptionCost',['../class_game.html#ad8da38b3186e9fd81e9da8347528a9d6',1,'Game::getSubscriptionCost()'],['../class_online_game.html#abee113aa2e99c2e2c2d6faf62508d3aa',1,'OnlineGame::getSubscriptionCost()']]],
+  ['gettotalplaytime',['getTotalPlayTime',['../class_game.html#a7709cc9fea63d07fbb2109b67fd19496',1,'Game']]],
+  ['getuser',['getUser',['../class_store.html#ab63ceafc056fc91e82390f2b1149ed49',1,'Store']]]
+];
