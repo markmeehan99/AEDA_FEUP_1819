@@ -43,14 +43,14 @@ public:
 
 	/**
 	 * @brief Guarda a informacao de uma sessao de jogo nun ficheiro .txt com o mesmo nome do Gamed
-	 * @param type	Tipo de sessão tem de ser um char 'U' obrigatoriamente.
+	 * @param type	Tipo de sessao tem de ser um char 'U' obrigatoriamente.
 	 * @param date	Data da sessao de jogo.
 	 */
 	void exportGameInfo(char type, Date date, int playTime); //overload for Updates
 
 	/**
 	 * @brief Guarda a informacao de uma sessao de jogo nunm ficheiro .txt com o mesmo nome do Game
-	 * @param type	Tipo de sessão tem de ser um char 'U' obrigatoriamente.
+	 * @param type	Tipo de sessao tem de ser um char 'U' obrigatoriamente.
 	 * @param date	Data da sessao de jogo.
 	 */
 	void exportGameInfo(char type, Date date);

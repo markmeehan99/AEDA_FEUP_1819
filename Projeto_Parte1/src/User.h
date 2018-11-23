@@ -125,7 +125,7 @@ public:
 	/**
 	 *
 	 * @brief Guarda a informacao de uma sessao de jogo nunm ficheiro .txt com o mesmo nome do User
-	 * @param type	Tipo de sessão tem de ser um char 'P' obrigatoriamente.
+	 * @param type	Tipo de sessao tem de ser um char 'P' obrigatoriamente.
 	 * @param date	Data da sessao de jogo
 	 * @param game	Nome do jogo que foi jogado
 	 * @param playTime Duracao da sessao de jogo
@@ -134,7 +134,7 @@ public:
 
 	/**
 	 * @brief Guarda a informacao de uma sessao de jogo nunm ficheiro .txt com o mesmo nome do User
-	 * @param type	Tipo de sessão tem de ser um char 'U' obrigatoriamente.
+	 * @param type	Tipo de sessao tem de ser um char 'U' obrigatoriamente.
 	 * @param date	Data da sessao de jogo.
 	 * @param game	Nome do jogo que foi jogado.
 	 */

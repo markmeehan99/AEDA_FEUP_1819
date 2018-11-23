@@ -96,7 +96,7 @@ public:
 	/**
 	 *
 	 * @brief Guarda a informacao de uma sessao de jogo nunm ficheiro .txt com o mesmo nome do Game.
-	 * @param type	Tipo de sessão tem de ser um char 'P' obrigatoriamente.
+	 * @param type	Tipo de sessao tem de ser um char 'P' obrigatoriamente.
 	 * @param date	Data da sessao de jogo.
 	 * @param playTime Duracao da sessao de jogo.
 	 */
@@ -104,7 +104,7 @@ public:
 
 	/**
 	 * @brief Guarda a informacao de uma sessao de jogo nunm ficheiro .txt com o mesmo nome do Game.
-	 * @param type	Tipo de sessão tem de ser um char 'U' obrigatoriamente.
+	 * @param type	Tipo de sessao tem de ser um char 'U' obrigatoriamente.
 	 * @param date	Data da sessao de jogo.
 	 */
 	virtual void exportGameInfo(char type, Date date);
@@ -114,7 +114,7 @@ public:
 	 */
 	virtual void importGameInfo(string file);
 	/**
-	 *  @brief Retorna o preço de subscricao do jogo.
+	 *  @brief Retorna o preco de subscricao do jogo.
 	 */
 	virtual double getSubscriptionCost() const;
 	/**
@@ -123,6 +123,14 @@ public:
 	 * @param game
 	 * @return	Nome do jogo
 	 */
+
+	/**
+	 * @brief Atualiza o lastupdate do jogo.
+	 *
+	*/
+	void update(Date date); 
+
+
 	friend ostream& operator<<(ostream& sp, Game& game);
   bool operator<(const Game& other);
 
