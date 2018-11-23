@@ -1,14 +1,6 @@
-/*
- * Game.h
- *
- *  Created on: 06/11/2018
- *      Author: josem
- */
-
 #ifndef GAME_H_
 #define GAME_H_
 
-#include "Review.h"
 #include "Date.h"
 #include <vector>
 #include <string>
@@ -17,7 +9,6 @@ using namespace std;
 
 class Game {
 private:
-	vector<Review *> reviews;
 	int age_limit = 0;
 	int id;
 	string name;
@@ -48,6 +39,7 @@ public:
 	void importGameInfo();
 	virtual double getSubscriptionCost() const;
 	friend ostream& operator<<(ostream& sp, Game& game);
+  bool operator<(const Game& other);
 
 	class NonExistentGame{
 		string name;

@@ -1,10 +1,3 @@
-/*
- * Store.h
- *
- *  Created on: 06/11/2018
- *      Author: josem
- */
-
 #ifndef STORE_H_
 #define STORE_H_
 
@@ -18,31 +11,33 @@
 using namespace std;
 
 class Store {
-	vector<User*> userList;
-	vector<Game*> allGames;
-	Date date;
+  vector<User*> userList;
+  vector<Game*> allGames;
+  Date date;
 
 public:
-	Store();
-	bool addGame(Game *game);
-	bool addUser(User *u);
-	void removeUser(string userName);
-	vector<User*> getAllUser() const;
-	vector<Game*> getAllGames() const;
-	Game* getGame(string gameName);
-	User* getUser(string userName);
-	Date getDate() const;
-	void changeDate(string date);
-
+  Store();
+  bool addGame(Game *game);
+  bool addUser(User *u);
+  void removeUser(string userName);
+  vector<User*> getAllUser() const;
+  vector<Game*> getAllGames() const;
+  Game* getGame(string gameName);
+  User* getUser(string userName);
+  Date getDate() const;
+  void changeDate(string date);
+  int averageGames() const;
+  double averageCost() const;
+  vector<Game*> printsorted() const;
 
 };
 
 
 class NonExistentUser{
-	string name;
+  string name;
 public:
-	NonExistentUser(string name){this->name = name;}
-	string getName(){return name;}
+  NonExistentUser(string name){this->name = name;}
+  string getName(){return name;}
 };
 
 

@@ -1,10 +1,3 @@
-/*
- * Date.h
- *
- *  Created on: 07/11/2018
- *      Author: josem
- */
-
 #ifndef DATE_H_
 #define DATE_H_
 

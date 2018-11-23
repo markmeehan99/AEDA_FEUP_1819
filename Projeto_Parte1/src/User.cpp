@@ -1,10 +1,3 @@
-/*
- * User.cpp
- *
- *  Created on: 06/11/2018
- *      Author: josem
- */
-
 #include "User.h"
 #include "Game.h"
 #include "Card.h"
@@ -269,4 +262,7 @@ Card* User::getCard(string cardName) const {
 ostream& operator<<(ostream& sp, User& user) {
 	sp << user.getName();
 	return sp;
+}
+void User::displayUser() const{
+	cout << "Nome: " << this->name << endl << "Email: " << this->email << endl << "Idade: " << this->age << endl << "Morada: " << this->address << endl;
 }

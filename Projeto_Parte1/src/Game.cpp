@@ -1,10 +1,3 @@
-/*
- * Game.cpp
- *
- *  Created on: 06/11/2018
- *      Author: josem
- */
-
 #include "Game.h"
 #include <iostream>
 #include <string>
@@ -123,7 +116,10 @@ ostream& operator<<(ostream& sp, Game& game){
 	return sp;
 }
 
-
 Date Game::getLastUpdate() const{
 	return lastUpdate;
+}
+
+bool Game::operator<(const Game& other){
+	return (this->name < other.getName());
 }

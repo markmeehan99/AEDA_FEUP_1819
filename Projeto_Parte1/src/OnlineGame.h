@@ -1,10 +1,3 @@
-/*
- * OnlineGame.h
- *
- *  Created on: 06/11/2018
- *      Author: josem
- */
-
 #ifndef ONLINEGAME_H_
 #define ONLINEGAME_H_
 

@@ -1,10 +1,3 @@
-/*
- * HomeGame.h
- *
- *  Created on: 06/11/2018
- *      Author: josem
- */
-
 #ifndef HOMEGAME_H_
 #define HOMEGAME_H_
 

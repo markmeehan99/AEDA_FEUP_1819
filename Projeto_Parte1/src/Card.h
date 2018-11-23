@@ -1,10 +1,3 @@
-/*
- * Card.h
- *
- *  Created on: 06/11/2018
- *      Author: josem
- */
-
 #ifndef CARD_H_
 #define CARD_H_
 
@@ -51,7 +44,7 @@ public:
 }
 	string getMessage()
 	{
-		return "Card " + InvCard + " does not exist";
+		return "O cartao" + InvCard + " nao existe!";
 	}
 };
 

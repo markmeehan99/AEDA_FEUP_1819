@@ -1,10 +1,3 @@
-/*
- * Date.cpp
- *
- *  Created on: 07/11/2018
- *      Author: josem
- */
-
 #include "Date.h"
 #include <string>
 
@@ -199,4 +192,3 @@ void Date::operator=(Date d) {
 	this->year = year;
 
 }
-

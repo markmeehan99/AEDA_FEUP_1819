@@ -1,10 +1,3 @@
-/*
- * Card.cpp
- *
- *  Created on: 06/11/2018
- *      Author: josem
- */
-
 #include "Card.h"
 #include "Date.h"
 
@@ -55,4 +48,3 @@ ostream& operator<<(ostream& sp, Card& card){
 
 	return sp;
 }
-

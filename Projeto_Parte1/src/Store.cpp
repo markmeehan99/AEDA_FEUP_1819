@@ -1,10 +1,3 @@
-/*
- * Store.cpp
- *
- *  Created on: 06/11/2018
- *      Author: josem
- */
-
 #include "Store.h"
 #include <vector>
 
@@ -79,4 +72,43 @@ void Store::removeUser(string userName){
 
 Date Store::getDate() const{
 	return date;
+}
+int Store::averageGames() const{
+	int counter = 0;
+	for (int i = 0; i < getAllUser().size(); i++){
+		counter += getAllUser().at(i)->getGames().size();
+	}
+	counter = counter / getAllUser().size();
+	return counter;
+}
+
+double Store::averageCost() const{
+	double counter=0;
+		for (int i = 0; i < getAllUser().size(); i++){
+			for (int k = 0; k < getAllUser().at(i)->getGames().size(); k++){
+				counter += getAllUser().at(i)->getGames().at(k)->getPrice();
+			}
+		}
+		counter = counter / getAllUser().size();
+		return counter;
+}
+
+vector<Game*> Store::printsorted() const{
+	vector <Game*> temp = allGames;
+
+	for (unsigned int j = 0; j < temp.size() - 1; ++j) {
+
+	    int min = j;
+	    for (unsigned int i = j+1; i < temp.size(); ++i) {
+	        if (temp.at(min) > temp.at(i)) {
+	            min = i;
+	        }
+
+	    }
+	    if (min != j)
+	        swap(temp.at(j), temp.at(min));
+	}
+
+
+	return temp;
 }
