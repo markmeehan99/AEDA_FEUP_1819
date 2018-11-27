@@ -1,7 +1,0 @@
-TODO.txt
- 
- 
-Destrutores
-VALIDAR INPUTS
-se o indice nao existir voltar para o inicio ou pedir de novo
- aceitar um 0 para voltar ao inicio
