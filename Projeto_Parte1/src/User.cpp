@@ -10,12 +10,20 @@ User::User() {
 	this->email = "";
 	this->age = 0;
 	this->address = "";
+	this->buy_prob = 0.7;
+	this->last_buy = Date();
 }
-User::User(string name, string email, int age, string address) {
+User::User(string name, string email, int age, string address, double buy_prob, string date) {
 	this->name = name;
 	this->email = email;
 	this->age = age;
 	this->address = address;
+	this->buy_prob = buy_prob;
+	this->last_buy = Date(date);
+}
+
+double User::getBuyProb() const {
+	return this->buy_prob;
 }
 
 string User::getName() const {
@@ -65,24 +73,37 @@ void User::buyGame(Game *game, Card* card) {
 
 	card->removeCredit(game->getPrice());
 	games.push_back(game);
+
+	//2a parte do projeto. Verificar se User é adormecido. Se for, adiciona-o a tabela de dispersao do jogo game.
+
+	if (this->buy_prob < 0.7) //0.7 representa o residuo. Se for menor, user e adormecido
+			{
+		game->addInactiveUser(this);
+		cout << "User adormecido foi adicionado a tabela de dispersao!\n";
+	}
+
+	cout << "User adormecido foi adicionado a tabela de dispersao!\n";
+
 }
 
 void User::importUserInfo(string file) {
 	file += ".txt";
 	ifstream is(file);
 
-	string name, email, age, address;
+	string name, email, age, address, prob;
 
 	if (is.is_open()) {
 		getline(is, name);
 		getline(is, email);
 		getline(is, age);
 		getline(is, address);
+		getline(is, prob);
 
 		this->address = address;
 		this->age = stoi(age);
 		this->email = email;
 		this->name = name;
+		this->buy_prob = stod(prob);
 
 		string temp;
 
@@ -263,6 +284,69 @@ ostream& operator<<(ostream& sp, User& user) {
 	sp << user.getName();
 	return sp;
 }
-void User::displayUser() const{
-	cout << "Nome: " << this->name << endl << "Email: " << this->email << endl << "Idade: " << this->age << endl << "Morada: " << this->address << endl;
+void User::displayUser() const {
+	cout << "Nome: " << this->name << endl << "Email: " << this->email << endl
+			<< "Idade: " << this->age << endl << "Morada: " << this->address
+			<< endl << "Prob: " << this->buy_prob << endl;
+}
+
+void User::addToWishList(Game* Game, int wishLevel) {
+
+	if (wishLevel > 10 || wishLevel < 0) {
+		cout << "Nivel de interesse invalido\n";
+		return;
+	}
+
+	double prob = ((double) rand() / (RAND_MAX));
+
+	GAME_PROB a = make_pair(Game, prob);
+
+	gameProbVector.emplace_back(a); //Voltar aqui se houverem erros
+	WISH_LIST_ITEM b = make_pair(a, wishLevel);
+
+	wishList.push(b);
+}
+
+void User::showBestBuy() {
+
+	cout << "\n O jogo " << wishList.top().first.first->getName()
+			<< " da sua Wish List esta a sua espera! Compre ja!\n";
+}
+
+void User::showWishList() {
+
+	vector<WISH_LIST_ITEM> toPush;
+
+	while(!wishList.empty()) {
+		cout << "\nJogo: " << wishList.top().first.first->getName();
+		cout << "  Interesse: " << wishList.top().second;
+
+		toPush.push_back(wishList.top());
+		wishList.pop();
+	}
+
+	while (!toPush.empty()) {
+		wishList.push(toPush.back());
+		toPush.pop_back();
+	}
+
+}
+
+void User::setLastBuy(Date date)
+{
+	this->last_buy = date;
+}
+
+Date User::getLastBuy()
+{
+	return this->last_buy;
+}
+
+bool User::buyTimePast(Date current_date)
+{
+	if (this->getLastBuy() > current_date)
+	{
+		return false;
+	}
+	return true;
 }

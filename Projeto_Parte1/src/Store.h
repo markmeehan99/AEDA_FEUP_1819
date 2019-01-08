@@ -7,13 +7,18 @@
 #include "Card.h"
 #include <vector>
 #include <string>
+//#include <set>
+#include <unordered_set>
 
 using namespace std;
+
+//typedef unordered_set<User, > HashTableUsers;
 
 class Store {
 	vector<User*> userList;
 	vector<Game*> allGames;
-	Date date = Date(2, 2, 2);
+	Date date = Date(02, 02, 02);
+	//HashTableUsers usersAdormecidos;
 
 public:
 	/**
@@ -86,6 +91,8 @@ public:
 	 * @return
 	 */
 	vector<Game*> printsorted() const;
+
+	//ostream& operator<< (ostream& stream);
 
 };
 

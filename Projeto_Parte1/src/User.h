@@ -1,13 +1,43 @@
 #ifndef USER_H_
 #define USER_H_
+class Game;
 
 #include <string>
 #include <vector>
 #include <utility>
-#include "Date.h"
-#include "Game.h"
-#include "Card.h"
 #include <tuple>
+#include "Date.h"
+#include <queue>
+//#include "Game.h"
+#include "Card.h"
+#include <unordered_set>
+
+typedef pair<Game*, double> GAME_PROB; //Jogo mais probabilidade de compra
+
+typedef pair<GAME_PROB, int> WISH_LIST_ITEM; // < <Jogo, probabilidade de compra>, Interessa 0-10>
+
+class heapCompare {
+	bool reverse;
+public:
+	heapCompare(const bool& revparam = false) {
+		reverse = revparam;
+	}
+	bool operator()(const pair<GAME_PROB, int>& lhs,
+			const pair<GAME_PROB, int>&rhs) const {
+
+		if (reverse)
+			if (lhs.second == rhs.second) {
+				return lhs.first.second > rhs.first.second;
+			} else
+				return (lhs.second > rhs.second);
+		else if (lhs.second == rhs.second) {
+			return lhs.first.second < rhs.first.second;
+		} else
+			return (lhs.second < rhs.second);
+	}
+};
+
+typedef priority_queue<WISH_LIST_ITEM, vector<pair<GAME_PROB, int>>, heapCompare> WISH_LIST_PQ;
 
 class User {
 	string name;
@@ -18,6 +48,10 @@ class User {
 	vector<Card *> cards;
 	vector<pair<Game*, Date*> > updateDate;
 	vector<vector<tuple<Game*, int, string> > > playSessions;
+	WISH_LIST_PQ wishList;
+	vector<GAME_PROB> gameProbVector;
+	double buy_prob;
+	Date last_buy = Date("01/01/00");
 
 public:
 	/**
@@ -33,7 +67,8 @@ public:
 	 * @param age Idade do utilizador.
 	 * @param address Morada do utilizador.
 	 */
-	User(string name, string email, int age, string address);
+	User(string name, string email, int age, string address, double buy_prob,
+			string date);
 	/**
 	 * @brief Retorna o nome do utilizador.
 	 * @return Nome do utilizador.
@@ -79,12 +114,14 @@ public:
 	 */
 	Card* getCard(string cardName) const;
 
+	double getBuyProb() const;
 	/**
 	 * @brief Compra o jogo neste utilizador se ele tiver dinheiro disponivel.
 	 *
 	 *
 	 * @param game Objeto da class Game.
 	 */
+
 	void buyGame(Game *game, Card* card);
 	/**
 	 * @brief Adiciona o cartao card ao utilizador.
@@ -150,6 +187,44 @@ public:
 	 * @return
 	 */
 	friend ostream& operator<<(ostream& sp, User& user);
+
+	//ACRESCENTAR FUNÇÕES DA PARTE 2 ABAIXO DESTA LINHA
+	/**
+	 * @brief Adiciona um WISH_LIST_ITEM à priority queue wishList
+	 * @param Game Nome do jogo a ser adicionado
+	 * @param wishLevel Inteiro que representa o nivel de interesse de 0-10
+	 */
+	void addToWishList( Game* Game, int wishLevel);
+	/**
+	 * @brief Faz display do jogo mais "apelativo" ao utilizador
+	 */
+	void showBestBuy();
+	/**
+	 * @brief Faz display da priority queue wishList
+	 */
+	void showWishList();
+
+	void setLastBuy(Date date);
+
+	Date getLastBuy();
+
+	bool buyTimePast(Date current_date);
+
 };
 
+/*
+ struct UserHash
+ {
+ int operator() (User u1)
+ {
+ return u1.getBuyProb();
+ }
+
+ bool operator() (User u1, User u2)
+ {
+ return (u1.getBuyProb() == u2.getBuyProb());
+ }
+ };*/
+
+//typedef std::unordered_set<User, UserHash, UserHash> HashTableUsersAdormecidos;
 #endif /* USER_H_ */

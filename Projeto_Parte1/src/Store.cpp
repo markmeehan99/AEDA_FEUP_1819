@@ -112,3 +112,12 @@ vector<Game*> Store::printsorted() const{
 
 	return temp;
 }
+/*
+ostream& Store::operator<< (ostream& stream)
+{
+	stream << this->date;
+
+	return stream;
+}*/
+
+

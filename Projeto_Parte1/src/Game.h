@@ -1,11 +1,34 @@
 #ifndef GAME_H_
 #define GAME_H_
+//class User;
+//struct UserHash;
 
 #include "Date.h"
+#include "User.h"
 #include <vector>
 #include <string>
+#include <unordered_set>
 
 using namespace std;
+
+
+struct UserHash
+{
+	int operator() (const User &u1) const
+	{
+		return u1.getBuyProb() * u1.getAddress().size();
+	}
+
+	bool operator() (const User &u1, const User &u2) const
+	{
+		return (u1.getBuyProb() == u2.getBuyProb());
+	}
+};
+
+
+typedef std::unordered_set<User, UserHash, UserHash> HashTableUsersAdormecidos;
+
+
 
 class Game {
 protected:
@@ -20,6 +43,7 @@ protected:
 	string publisher;
 	int totalPlaytime = 0;
 	Date lastUpdate = Date(1, 1, 1);
+	HashTableUsersAdormecidos HashUsersAdormecidos;
 public:
 	/**
 	 * @brief Cria um jogo vazio
@@ -129,6 +153,12 @@ public:
 	 *
 	*/
 	void update(Date date); 
+
+	void addInactiveUser(User *u1);
+
+	void removeInactiveUser(User *u1);
+
+	void printTodosAdormecidos() const;
 
 
 	friend ostream& operator<<(ostream& sp, Game& game);

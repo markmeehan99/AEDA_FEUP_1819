@@ -121,6 +121,8 @@ ostream& operator<<(ostream& sp, Game& game){
 	return sp;
 }
 
+
+
 Date Game::getLastUpdate() const{
 	return lastUpdate;
 }
@@ -137,3 +139,54 @@ void Game::importGameInfo(string file){
 void Game::update(Date date){
 	this->lastUpdate = date;
 }
+
+
+void Game::addInactiveUser(User *u1)
+{
+	User *u2 = u1;
+
+	HashTableUsersAdormecidos::iterator it = HashUsersAdormecidos.find(*u2);
+
+	// Novo user ; Adiciona-lo à tabela de dispersão
+	if (it == HashUsersAdormecidos.end())
+	{
+		HashUsersAdormecidos.insert(*u2);
+
+	}// O user já existe! Atualiza-lo
+	else
+	{
+		// Remover o registo antigo
+		HashUsersAdormecidos.erase(it);
+
+		// Adicionar um novo registo
+		HashUsersAdormecidos.insert(*u2);
+	}
+}
+
+void Game::removeInactiveUser(User *u1)
+{
+	for (HashTableUsersAdormecidos::iterator it=HashUsersAdormecidos.begin() ; it!=HashUsersAdormecidos.end() ; it++)
+	{
+		if (it->getName() == u1->getName())
+			HashUsersAdormecidos.erase(it);
+	}
+}
+
+
+//2a parte do projeto. Imrpime todos os users adormecidos do jogo em questao.
+void Game::printTodosAdormecidos() const
+{
+	bool exists = false;
+
+	for (HashTableUsersAdormecidos::const_iterator it=HashUsersAdormecidos.begin() ; it!=HashUsersAdormecidos.end() ; it++)
+	{
+		it->displayUser();
+		cout << endl;
+		exists = true;
+	}
+
+	if (!exists) cout << "Para este jogo nao ha utilizadoes adormecidos.\n";
+
+}
+
+

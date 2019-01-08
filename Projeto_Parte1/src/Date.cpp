@@ -1,9 +1,10 @@
 #include "Date.h"
 #include <string>
+#include <iostream>
 
 Date::Date() {
-	this->day = 1;
-	this->month = 1;
+	this->day = 01;
+	this->month = 01;
 	this->year = 00;
 }
 
@@ -24,16 +25,35 @@ string Date::getDate() const {
 	return res;
 }
 
+
+string Date::getDateIncremented() const {
+	string res;
+	if (month + 5 <= 12)
+		res += to_string(day) + "/" + to_string(month + 5) + "/" + to_string(year);
+	else
+		res += to_string(day) + "/" + to_string((month + 5) % 12) + "/" + to_string(year + 1);
+
+	return res;
+}
+
+
 bool Date::operator>(const Date &d1) {
+
+	//Se os anos forem diferentes
 
 	if (this->year > d1.year)
 		return true;
 	else if (this->year < d1.year)
 		return false;
+
+
+	//Se os anos forem iguais
+
 	if (this->month > d1.month)
 		return true;
 	else if (this->month < d1.month)
 		return false;
+
 	if (this->day > d1.day)
 		return true;
 	else if (this->day < d1.day)
@@ -46,7 +66,7 @@ void Date::setDate(int day, int month, int year) {
 	bool InvDate = false; //If date is invalid
 
 	//Checks year
-	if (year <= 0)
+	if (year < 0)
 		InvDate = true;
 
 	//Checks month and respective day
@@ -122,10 +142,40 @@ void Date::setDate(string date) {
 
 }
 
+int Date::getDay()
+{
+	return day;
+}
+
+int Date::getMonth()
+{
+	return month;
+}
+
+int Date::getYear()
+{
+	return year;
+}
+
+
 void Date::operator=(Date d) {
 
-	this->day = day;
-	this->month = month;
-	this->year = year;
-
+	this->day = d.getDay();
+	this->month = d.getMonth();
+	this->year = d.getYear();
 }
+
+/*
+ostream& Date::operator<< (ostream& stream)
+{
+	stream << this->day << "/" << this->month << "/" << this->year;
+
+	return stream;
+}*/
+
+
+ostream& operator<<(ostream& sp, Date& date) {
+	sp << date.getDate();
+	return sp;
+}
+

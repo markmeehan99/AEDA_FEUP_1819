@@ -50,6 +50,18 @@ public:
 	 * @return True se a data for mais avancada no tempo do que a de d1.
 	 * @return False se a data for menos avancada no tempo do que a de d1.
 	 */
+
+	int getDay();
+
+	int getMonth();
+
+	int getYear();
+
+
+	//void viewDate();
+
+	string getDateIncremented() const;
+
 	bool operator>(const Date &d1);
 
 	/**
@@ -57,6 +69,8 @@ public:
 	 * @param d
 	 */
 	void operator=(Date d);
+
+	//ostream& operator<< (ostream& stream);
 };
 
 class InvalidDate: public exception {
@@ -83,6 +97,5 @@ public:
 	}
 };
 
-//hehe
 
 #endif /* DATE_H_ */

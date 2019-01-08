@@ -10,8 +10,8 @@
 #include "Card.h"
 #include "Store.h"
 #include "Date.h"
-#include "User.h"
 #include "Game.h"
+#include "User.h"
 #include "HomeGame.h"
 #include "OnlineGame.h"
 
@@ -20,6 +20,7 @@ using namespace std;
 #include <string>
 #include <iomanip>
 #include <fstream>
+#include <queue>
 
 Store store;
 
@@ -54,6 +55,17 @@ void printVector(vector<Card*> c) {
 	cout << endl;
 }
 
+//2a parte do projeto. Imprimir todos os utilizadores adormecidos
+//void viewUsersAdormecidos()
+//{
+//	printVector(store.getAllGames());
+//	cout << "Nome do jogo: \n";
+//	string gamename;
+//	cin >> gamename;
+
+//	store.getGame(gamename)->printTodosAdormecidos(); //CONTINUAR
+//}
+
 void viewGameinfo() {
 	printVector(store.getAllGames());
 	cout << "Nome do jogo: \n";
@@ -70,6 +82,10 @@ void viewGameinfo() {
 	cout << "Tempo jogado por todos os users: "
 			<< store.getGame(gamename)->getTotalPlayTime() << endl;
 	cout << "Categoria: " << store.getGame(gamename)->getGenre() << endl;
+
+	//2a parte do projeto. Imprime todos os users adormecidos do jogo pretendido.
+	cout << "Utilizadores adormecidos: " << endl;
+	store.getGame(gamename)->printTodosAdormecidos();
 }
 
 void viewGames() {
@@ -85,7 +101,7 @@ void viewGames() {
 				<< store.printsorted().at(i)->getPlatform() << setw(12)
 				<< store.printsorted().at(i)->getPublisher() << setw(7)
 				<< store.printsorted().at(i)->getTotalPlayTime() << setw(11)
-				<< store.printsorted().at(i)->getGenre();
+				<< store.printsorted().at(i)->getGenre()<< endl;
 	}
 }
 
@@ -109,7 +125,7 @@ void viewUser() {
 	string name;
 	cin >> name;
 	cout << "0-Voltar ao inicio\n" << "1-ver dados \n" << "2-Ver jogos \n"
-			<< "3-Ver cards";
+			<< "3-Ver cards\n" << "4-Ver Wish List\n";
 	int opcao;
 	cin >> opcao;
 	if (opcao == 0) {
@@ -120,8 +136,9 @@ void viewUser() {
 		printVector(store.getUser(name)->getGames());
 	} else if (opcao == 3) {
 		printVector(store.getUser(name)->getCards());
+	}else if(opcao == 4){
+		store.getUser(name)->showWishList();
 	}
-
 }
 
 void viewData() {
@@ -141,6 +158,8 @@ void viewData() {
 		viewGameinfo();
 	} else if (input == 4) {
 		viewGames();
+	} else if (input == 5) {
+			cout << store.getDate().getDate() << endl;
 	}
 }
 
@@ -164,6 +183,7 @@ void addUser() {
 		string email;
 		int age;
 		string address;
+		double prob;
 		cout << "Nome do utilizador:";
 		cin >> name;
 		cout << "Email:";
@@ -172,9 +192,12 @@ void addUser() {
 		cin >> age;
 		cout << "Morada:";
 		cin >> address;
+		cout << "Probabilidade de compra: ";
+		cin >> prob;
 		//ADICIONAR TRY/CATCH E CRIAR A EXCEPTION
-		User *u = new User(name, email, age, address);
+		User *u = new User(name, email, age, address, prob, store.getDate().getDate());
 		store.addUser(u);
+
 		cout << "Utilizador " << *u << " adicionado!\n\n";
 	}
 }
@@ -190,15 +213,17 @@ void removeUser() {
 	cout << "Utilizador " << name << " eliminado!\n\n";
 }
 
-void userUpdateGame(string userName, string gameName) {
-	if (!store.getUser(userName)->isUpdated(gameName)) {
-		store.getUser(userName)->exportUserInfo('U', store.getDate(),
-				*store.getGame(gameName));
-		cout << "O jogo " << gameName << "foi atualziado!\n\n";
+void userUpdateGame(string userName, string gameName)
+{
+	if (!store.getUser(userName)->isUpdated(gameName))
+	{
+		store.getUser(userName)->exportUserInfo('U', store.getDate(), *store.getGame(gameName));
+
+		cout << "O jogo " << gameName << " foi atualziado!\n\n";
 	}
 }
 
-bool checkCardDate(Card* c) {
+bool CardDateValid(Card* c) {
 	if (store.getDate() > c->getExpDate()) {
 		return false;
 	} else
@@ -206,11 +231,21 @@ bool checkCardDate(Card* c) {
 
 }
 void userBuyGame(string userName, string gameName, string cardName) {
-	if (checkCardDate(store.getUser(userName)->getCard(cardName))) { //TRY/CATCH
+
+
+	if (!CardDateValid(store.getUser(userName)->getCard(cardName)))
+	{ //TRY/CATCH
+		cout << "cona1\n";
 		store.getUser(userName)->buyGame(store.getGame(gameName),
 				store.getUser(userName)->getCard(cardName));
-		userUpdateGame(userName, gameName);
-	}
+		cout << "cona2\n";
+		//userUpdateGame(userName, gameName);
+		cout << "cona2\n";
+		//Set new last buy Date to current date
+		store.getUser(userName)->setLastBuy(store.getDate());
+		cout << "cona4\n";
+
+	};
 }
 
 void userAddCard(string userName) { //TODO: VALIDAR INPUTS
@@ -248,7 +283,7 @@ void alterUser() { //TODO: INSERIR TRY/CATCH
 		return;
 	cout << "\nO que pretende fazer?\n0-Voltar ao inicio\n1-Jogar jogo\n"
 			"2-Atualizar jogo\n3-Comprar jogo\n"
-			"4-Adicionar cartao\n5-Remover cartao\n";
+			"4-Adicionar cartao\n5-Remover cartao\n6-Adicionar a Wish List\n";
 	int input;
 	cin >> input;
 	if (input == 0) {
@@ -295,6 +330,18 @@ void alterUser() { //TODO: INSERIR TRY/CATCH
 		if (cardName == "0")
 			return;
 		userRemoveCard(userName, cardName);
+	}else if(input == 6){
+		printVector(store.getAllGames());
+		cout << "\nQual jogo quer adicionar a sua Wish List? Insira 0 para cancelar\n";
+		cin >> gameName;
+		if(gameName == "0")
+			return;
+		cout << "\nQual o nivel de interesse? 0-10\n";
+		int n;
+		cin >> n;
+		Game *tempGame = store.getGame(gameName);
+		store.getUser(userName)->addToWishList(tempGame, n);
+		cout << "Adicionado com sucesso!";
 	}
 }
 void addOnlineGame() {
@@ -311,8 +358,9 @@ void addOnlineGame() {
 		Game *g = new OnlineGame();
 		g->importGameInfo(file);
 		store.addGame(g);
-		cout << "O jogo " << g->getName() << "foi adicionado com sucesso!\n\n";
-	} else if (input == 2) {
+		cout << "O jogo " << g->getName() << " foi adicionado com sucesso!\n\n";
+	} else if (input == 2)
+	{
 		string name, platform, genre, publisher;
 		int age, price, rating;
 		double cost;
@@ -331,15 +379,14 @@ void addOnlineGame() {
 		cin >> genre;
 		cout << "\nPublicador: ";
 		cin >> publisher;
-		cout
-				<< "\nSe o jogo for pago mensalmente o valor seguinte sera 1, se for pago por hora de jogo será 0\n";
+		cout << "\nSe o jogo for pago mensalmente o valor seguinte sera 1, se for pago por hora de jogo será 0\n";
 		cin >> paymentMethod;
 		cout << "\nPreco da subscricao:";
 		cin >> cost;
 		Game *g = new OnlineGame(age, name, price, rating, platform, genre,
 				publisher, cost, paymentMethod);
 		store.addGame(g);
-		cout << "O jogo " << g->getName() << "foi adicionado com sucesso!\n\n";
+		cout << "O jogo " << g->getName() << " foi adicionado com sucesso!\n\n";
 	}
 }
 
@@ -357,7 +404,7 @@ void addHomeGame() {
 		Game *g = new HomeGame();
 		g->importGameInfo(file);
 		store.addGame(g);
-		cout << "O jogo " << g->getName() << "foi adicionado com sucesso!\n\n";
+		cout << "O jogo " << g->getName() << " foi adicionado com sucesso!\n\n";
 	} else if (input == 2) {
 		string name, platform, genre, publisher;
 		int age, price, rating;
@@ -378,7 +425,10 @@ void addHomeGame() {
 		Game *g = new HomeGame(age, name, price, rating, platform, genre,
 				publisher);
 		store.addGame(g);
-		cout << "O jogo " << g->getName() << "foi adicionado com sucesso!\n\n";
+		cout << "O jogo " << g->getName() << " foi adicionado com sucesso!\n\n";
+
+
+		//2a PARTE DO PROJETO. PARA ESTE JOGO, V
 	}
 }
 
@@ -436,6 +486,22 @@ void editData() {
 		cout << "Escreva a data(dd/mm/aa):\n";
 		cin >> d;
 		store.changeDate(d);
+
+		//2a parte do projeto. Ao mudar a data, verificar se ja passaram 5 meses desde a ultima compra para todos os users.
+		//Se sim, esses users passam a ser adormecidos e sao adicionados a tabela de dispersao.
+
+
+		//Check if Lasy Buy + 5 Months < Current Date.
+		for (Game* game : store.getAllGames())
+			for (User* userName : store.getAllUser())
+				if (userName->buyTimePast(store.getDate()))
+				{
+					//If so, o user \E9 adormecido.
+					game->addInactiveUser(userName);
+					cout << "User " << userName->getName() << " adormecido!!" << endl;
+
+				} else cout << "User nao adormecido\n";
+
 	} else {
 		cout << "Opcao invalida!\n\n";
 		editData();
@@ -453,11 +519,11 @@ void t() {
 }
 int main() {
 
-	cout << "!!!Buenos Dias Matosinhos!!!\n" << endl;
+	cout << "!!!Bem vindo!\n" << endl;
 
 	int input;
 	while (true) {
-		cout << "O que pretende fazer?\n1-Editar Dados\n2-Ver Dados\n3-Sair\n";
+		cout << "\nO que pretende fazer?\n1-Editar Dados\n2-Ver Dados\n3-Sair\n";
 		cout << "Opcao: ";
 		cin >> input;
 		if (input == 1) {
@@ -472,10 +538,28 @@ int main() {
 		}
 	}
 
+	/*TESTE pq;
+	//priority_queue<pair<char,int>, vector<pair<char,int>>, test> pq;
+
+	pair<char,int> b = make_pair('b',1);
+	pair<char,int> c = make_pair('a',2);
+	pair<char,int> d = make_pair('c',20);
+	pair<char,int> e = make_pair('d',10);
+
+	pq.push(make_pair('c',1));
+	pq.push(c);
+	pq.push(d);
+	pq.push(e);
+
+	while(!pq.empty()){
+		cout << pq.top().second << endl;
+		pq.pop();
+	}*/
+
 	/*cout << store.getAllUser().at(0)->getName() << endl;
 	 cout << store.getAllUser().size();
 	 cout << *store.getAllUser().at(0) << endl;
-	 cout << *store.getAllUser().at(1) << endl;*/
+	 cout << *store.getAllUser().at(1) << endl;
 
-	return 0;
+	return 0;*/
 }
