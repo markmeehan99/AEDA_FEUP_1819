@@ -21,3 +21,12 @@ Faz o Joe comprar os jogos:
 1 3 Joe 3 Tennis nome
 1 3 Joe 3 Snake nome
 1 3 Joe 3 ChickenRun nome
+
+Adicionar jogos à wishList:
+1 3 David 6 Carros 9
+1 3 David 6 Snake 8
+1 3 David 6 ChickenRun 7
+1 3 David 6 Tennis 8
+
+
+1 1 1 Joe 1 3 Joe 4 nome 10 1000 10/10/20

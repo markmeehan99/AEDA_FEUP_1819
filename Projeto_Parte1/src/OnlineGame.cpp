@@ -8,7 +8,7 @@ OnlineGame::OnlineGame() {
 }
 
 OnlineGame::OnlineGame(int age_limit, string name, double price, int rating,
-		string platform, string genre, string publisher,
+		string platform, string genre, Empresa *publisher,
 		double subscriptionCost, bool isMontlhy) :
 		Game(age_limit, name, price, rating, platform, genre, publisher) {
 	if (subscriptionCost > 0)
@@ -36,7 +36,7 @@ void gameInfoHeader(OnlineGame *game) {
 		File << game->getName() << endl << game->getAgeLimit() << endl
 				<< game->getPrice() << endl << game->getRating() << endl
 				<< game->getPlatform() << endl << game->getGenre() << endl
-				<< game->getPublisher() << endl << game->getTotalPlayTime()
+				<< game->getPublisher()->getName() << endl << game->getTotalPlayTime()
 				<< endl << game->getPaymentMethod() << endl
 				<< game->getSubscriptionCost() << endl << endl;
 	}
@@ -79,7 +79,7 @@ void OnlineGame::exportGameInfo(char type, Date date) { // for UPDATES
 	File.close();
 }
 
-void OnlineGame::importGameInfo(string file) {
+void OnlineGame::importGameInfo(string file, BST<Empresa*> empresas) {
 	file += ".txt";
 	ifstream is(file);
 
@@ -105,36 +105,21 @@ void OnlineGame::importGameInfo(string file) {
 		this->rating = stoi(rating);
 		this->platform = platform;
 		this->genre = genre;
-		this->publisher = publisher;
 		this->id = ID;
 		this->subscriptionCost = stoi(cost);
 		this->isMonthly = stoi(payMethod);
 
-		/*string temp;
+		BSTItrIn<Empresa*> itr(empresas);
+		while(!itr.isAtEnd()){
+			if (itr.retrieve()->getName() == publisher){
+				this->publisher = itr.retrieve();
+				break;
+			}
+			itr.advance();
+		}
 
-		 getline(is, temp);
-		 getline(is, temp);
 
-		 string ignore, type, date, game, no_hours;
-
-		 //Import user info
-		 while (!is.eof()) {
-		 getline(is, type); //TRATAR)
-		 getline(is, date);
-		 getline(is, game);
-		 getline(is, no_hours);
-		 getline(is, ignore);
-
-		 for (Game* g : games) {
-		 if (g->getName() == game) {
-		 //found game
-		 Date *d = new Date(date);
-
-		 this->updateDate.push_back(make_pair(g, d));
-		 }
-		 }
-		 }*/
 	} else
 		cout << "Nao abriu file" << endl;
-
+	is.close();
 }

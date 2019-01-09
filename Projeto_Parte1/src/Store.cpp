@@ -1,7 +1,7 @@
 #include "Store.h"
 #include <vector>
-
-Store::Store() {
+#include <iostream>
+Store::Store() : empresas(new Empresa()){
 
  }
 
@@ -12,6 +12,14 @@ bool Store::addGame(Game *game) {
 			return false;
 	}
 	allGames.push_back(game);
+	BSTItrIn<Empresa*> itr(empresas);
+	while(!itr.isAtEnd()){
+		if (itr.retrieve()->getName() == game->getPublisher()->getName()){
+			itr.retrieve()->Addgame(game);
+			break;
+		}
+		itr.advance();
+	}
 
 	return true;
 }
@@ -27,6 +35,24 @@ bool Store::addUser(User *u) {
 }
 
 
+void Store::addEmpresa(Empresa *empresa){
+	this->empresas.insert(empresa);
+}
+
+
+Empresa* Store::getEmpresa(string name){
+	BSTItrIn<Empresa*> itr(empresas);
+	while(!itr.isAtEnd()){
+		if (itr.retrieve()->getName() == name){
+			return itr.retrieve();
+		}
+		itr.advance();
+	}
+	cout << "Nao encontrou empresa";
+	return nullptr;
+}
+
+
 Game* Store::getGame(string gameName) {
 
 	for (size_t i = 0; i < allGames.size(); i++) {
@@ -37,8 +63,20 @@ Game* Store::getGame(string gameName) {
 	throw Game::NonExistentGame(gameName);
 }
 
+
+
+BST<Empresa*> Store::getEmpresas(){
+	return this->empresas;
+}
+
+;
+
+
+
 void Store::changeDate(string date){
+	cout << "3\n";
 	this->date.setDate(date);
+	cout << "4\n";
 
 }
 

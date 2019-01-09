@@ -12,7 +12,7 @@ Game::Game(){
 }
 
 Game::Game(int age_limit, string name, double price, int rating, string platform,
-		string genre, string publisher) {
+		string genre, Empresa *publisher) {
 	ID++;
 	this->age_limit = age_limit;
 	this->name = name;
@@ -46,7 +46,7 @@ string Game::getPlatform() const {
 string Game::getGenre() const {
 	return genre;
 }
-string Game::getPublisher() const {
+Empresa* Game::getPublisher() const {
 	return publisher;
 }
 
@@ -61,7 +61,7 @@ void gameInfoHeader(Game *game) {
 		File << game->getName() << endl << game->getID() << endl
 				<< game->getAgeLimit() << endl << game->getPrice() << endl
 				<< game->getRating() << endl << game->getPlatform() << endl
-				<< game->getGenre() << endl << game->getPublisher() << endl
+				<< game->getGenre() << endl << game->getPublisher()->getName() << endl
 				<< game->getTotalPlayTime() << endl<< endl;
 	}
 
@@ -131,7 +131,7 @@ bool Game::operator<(const Game& other){
 	return (this->name < other.getName());
 }
 
-void Game::importGameInfo(string file){
+void Game::importGameInfo(string file, BST<Empresa*> empresas){
 
 }
 
@@ -166,10 +166,12 @@ void Game::addInactiveUser(User *u1)
 void Game::removeInactiveUser(User *u1)
 {
 	for (HashTableUsersAdormecidos::iterator it=HashUsersAdormecidos.begin() ; it!=HashUsersAdormecidos.end() ; it++)
-	{
-		if (it->getName() == u1->getName())
+		if (it->getName() == u1->getName()){
 			HashUsersAdormecidos.erase(it);
-	}
+			return;
+		}
+
+	//auto it = HashUsersAdormecidos.find(u1);
 }
 
 

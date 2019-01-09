@@ -7,6 +7,8 @@
 #include "Card.h"
 #include <vector>
 #include <string>
+#include "BST.h"
+#include "Empresa.h"
 //#include <set>
 #include <unordered_set>
 
@@ -19,6 +21,7 @@ class Store {
 	vector<Game*> allGames;
 	Date date = Date(02, 02, 02);
 	//HashTableUsers usersAdormecidos;
+	BST<Empresa*> empresas;
 
 public:
 	/**
@@ -60,6 +63,13 @@ public:
 	 * @return Pointer para o jogo
 	 */
 	Game* getGame(string gameName);
+
+
+	BST<Empresa*> getEmpresas();
+
+	Empresa* getEmpresa(string name);
+
+	void addEmpresa(Empresa *empresa);
 	/**
 	 * @brief Retorna um pointer para um user
 	 * @param userName

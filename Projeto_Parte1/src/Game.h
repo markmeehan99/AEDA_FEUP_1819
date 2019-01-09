@@ -5,13 +5,15 @@
 
 #include "Date.h"
 #include "User.h"
+#include "Empresa.h"
 #include <vector>
 #include <string>
 #include <unordered_set>
+#include "BST.h"
 
 using namespace std;
 
-
+class Empresa;
 struct UserHash
 {
 	int operator() (const User &u1) const
@@ -40,7 +42,7 @@ protected:
 	int rating;
 	string platform;
 	string genre;
-	string publisher;
+	Empresa *publisher;
 	int totalPlaytime = 0;
 	Date lastUpdate = Date(1, 1, 1);
 	HashTableUsersAdormecidos HashUsersAdormecidos;
@@ -60,7 +62,7 @@ public:
 	 * @param publisher Publicador
 	 */
 	Game(int age_limit, string name, double price, int rating, string platform,
-			string genre, string publisher);
+			string genre, Empresa *publisher);
 	/**
 	 * @brief Retorna o nome do jogo.
 	 * @return Nome do jogo.
@@ -100,7 +102,7 @@ public:
 	 * @brief Retorna o publicador do jogo.
 	 * @return Publicador do jogo.
 	 */
-	string getPublisher() const;
+	Empresa* getPublisher() const;
 	/**
 	 * @brief Retorna o tempo total que todos os utilizadores jogaram desse jogo.
 	 * @return Tempo total de jogo.
@@ -136,7 +138,7 @@ public:
 	 * @brief Carregar um jogo atraves de um ficheiro.
 	 * @param file Nome do ficheiro  a ser carregado sem o .txt.
 	 */
-	virtual void importGameInfo(string file);
+	virtual void importGameInfo(string file, BST<Empresa*> empresas);
 	/**
 	 *  @brief Retorna o preco de subscricao do jogo.
 	 */

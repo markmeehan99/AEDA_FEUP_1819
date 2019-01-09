@@ -27,11 +27,11 @@ string Date::getDate() const {
 
 
 string Date::getDateIncremented() const {
-	string res;
+	char res[10];
 	if (month + 5 <= 12)
-		res += to_string(day) + "/" + to_string(month + 5) + "/" + to_string(year);
+		sprintf(res, "%02d/%02d/%02d", day, month +5, year);
 	else
-		res += to_string(day) + "/" + to_string((month + 5) % 12) + "/" + to_string(year + 1);
+		sprintf(res, "%02d/%02d/%02d",day, (month + 5) % 12,year +1);
 
 	return res;
 }
@@ -66,7 +66,7 @@ void Date::setDate(int day, int month, int year) {
 	bool InvDate = false; //If date is invalid
 
 	//Checks year
-	if (year < 0)
+	if (year < 0 || day < 0 || month < 0)
 		InvDate = true;
 
 	//Checks month and respective day
@@ -135,11 +135,12 @@ void Date::setDate(int day, int month, int year) {
 }
 
 void Date::setDate(string date) {
+	cout << "5\n";
 	int d = stoi(date.substr(0, 2));
 	int m = stoi(date.substr(3, 2));
 	int y = stoi(date.substr(6, 2));
 	setDate(d, m, y);
-
+	cout << "6\n";
 }
 
 int Date::getDay()

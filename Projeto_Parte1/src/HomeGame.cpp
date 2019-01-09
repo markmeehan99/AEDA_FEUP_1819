@@ -9,12 +9,12 @@ HomeGame::HomeGame(){
 
 }
 HomeGame::HomeGame(int age_limit, string name, double price, int rating,
-		string platform, string genre, string publisher) :
+		string platform, string genre, Empresa *publisher) :
 		Game(age_limit, name, price, rating, platform, genre, publisher) {
 
 }
 
-void HomeGame::importGameInfo(string file) {
+void HomeGame::importGameInfo(string file, BST<Empresa*> empresas) {
 
 	file += ".txt";
 	ifstream is(file);
@@ -38,9 +38,17 @@ void HomeGame::importGameInfo(string file) {
 		this->rating = stoi(rating);
 		this->platform = platform;
 		this->genre = genre;
-		this->publisher = publisher;
 		this->id = ID;
 
+
+		BSTItrIn<Empresa*> itr(empresas);
+		while(!itr.isAtEnd()){
+			if (itr.retrieve()->getName() == publisher){
+				this->publisher = itr.retrieve();
+				break;
+			}
+			itr.advance();
+		}
 	} else
 		cout << "Nao abriu file" << endl;
 }

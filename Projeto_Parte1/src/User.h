@@ -204,6 +204,10 @@ public:
 	 */
 	void showWishList();
 
+	void addToGameProb(Game* Game);
+
+	GAME_PROB getGameProb(Game * game);
+
 	void setLastBuy(Date date);
 
 	Date getLastBuy();

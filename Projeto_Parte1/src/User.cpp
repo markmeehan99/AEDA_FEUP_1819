@@ -75,14 +75,24 @@ void User::buyGame(Game *game, Card* card) {
 	games.push_back(game);
 
 	//2a parte do projeto. Verificar se User é adormecido. Se for, adiciona-o a tabela de dispersao do jogo game.
+	for (int i = 0; i< gameProbVector.size(); i++) {
+		if (gameProbVector.at(i).first->getPlatform() == game->getPlatform()) {
+			gameProbVector.at(i).first->removeInactiveUser(this);
+			cout << "User tornou.se ativo\n";
 
-	if (this->buy_prob < 0.7) //0.7 representa o residuo. Se for menor, user e adormecido
-			{
-		game->addInactiveUser(this);
-		cout << "User adormecido foi adicionado a tabela de dispersao!\n";
+			/*if (this->buy_prob < 0.7) //0.7 representa o residuo. Se for menor, user e adormecido
+			 {
+			 game->addInactiveUser(this);
+			 cout
+			 << "User adormecido foi adicionado a tabela de dispersao!\n";
+			 }*/
+		}
+		if(gameProbVector.at(i).first->getName() == game->getName()){
+			gameProbVector.erase(gameProbVector.begin() + i);
+		}
 	}
 
-	cout << "User adormecido foi adicionado a tabela de dispersao!\n";
+	//cout << "User adormecido foi adicionado a tabela de dispersao!\n";
 
 }
 
@@ -212,7 +222,7 @@ void User::removeCard(string card) {
 		throw InvalidCard(card);
 
 	for (unsigned int i = 0; i < cards.size(); i++) {
-		if (cards.at(i)->getName() == card){
+		if (cards.at(i)->getName() == card) {
 			cards.erase(cards.begin() + i);
 			return;
 		}
@@ -297,14 +307,29 @@ void User::addToWishList(Game* Game, int wishLevel) {
 		return;
 	}
 
+	GAME_PROB a = getGameProb(Game);
+	WISH_LIST_ITEM b = make_pair(a, wishLevel);
+
+	wishList.push(b);
+}
+
+GAME_PROB User::getGameProb(Game * game) {
+	for (GAME_PROB b : gameProbVector) {
+
+		if (b.first->getName() == game->getName()) {
+			return b;
+		}
+	}
+	cout << "\nnao existe\n";
+	//throw Game::NonExistentGame(game->getName());
+}
+void User::addToGameProb(Game* Game) {
+
 	double prob = ((double) rand() / (RAND_MAX));
 
 	GAME_PROB a = make_pair(Game, prob);
 
 	gameProbVector.emplace_back(a); //Voltar aqui se houverem erros
-	WISH_LIST_ITEM b = make_pair(a, wishLevel);
-
-	wishList.push(b);
 }
 
 void User::showBestBuy() {
@@ -317,9 +342,10 @@ void User::showWishList() {
 
 	vector<WISH_LIST_ITEM> toPush;
 
-	while(!wishList.empty()) {
+	while (!wishList.empty()) {
 		cout << "\nJogo: " << wishList.top().first.first->getName();
 		cout << "  Interesse: " << wishList.top().second;
+		cout << " Prob: " << wishList.top().first.second << endl;
 
 		toPush.push_back(wishList.top());
 		wishList.pop();
@@ -332,21 +358,20 @@ void User::showWishList() {
 
 }
 
-void User::setLastBuy(Date date)
-{
+void User::setLastBuy(Date date) {
 	this->last_buy = date;
 }
 
-Date User::getLastBuy()
-{
+Date User::getLastBuy() {
 	return this->last_buy;
 }
 
-bool User::buyTimePast(Date current_date)
-{
-	if (this->getLastBuy() > current_date)
-	{
-		return false;
+bool User::buyTimePast(Date current_date) {
+	cout << "11\n";
+	Date a(this->getLastBuy().getDateIncremented());
+	cout << "10\n";
+	if (current_date > a) {
+		return true;
 	}
-	return true;
+	return false;
 }

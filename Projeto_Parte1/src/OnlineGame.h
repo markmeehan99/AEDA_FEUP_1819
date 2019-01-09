@@ -3,6 +3,8 @@
 
 #include "Game.h"
 #include <string>
+#include "Empresa.h"
+#include "BST.h"
 
 using namespace std;
 
@@ -28,7 +30,7 @@ public:
 	 * @param isMonthly	True se o jogo for pago mensalmente ou false se for pago consoante o numero de horas jogadas
 	 */
 	OnlineGame(int age_limit, string name, double price, int rating,
-			string platform, string genre, string publisher,
+			string platform, string genre, Empresa *publisher,
 			double subscriptionCost, bool isMonthly);
 	/**
 	 * @brief Retorna o metodo de pagamento(True se o jogo for pago mensalmente ou false se for pago consoante o numero de horas jogadas)
@@ -58,7 +60,7 @@ public:
 	 * @brief Carregar um jogo atraves de um ficheiro.
 	 * @param file Nome do ficheiro  a ser carregado sem o .txt.
 	 */
-	void importGameInfo(string file);
+	void importGameInfo(string file, BST<Empresa*> empresas);
 };
 
 #endif /* ONLINEGAME_H_ */

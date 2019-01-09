@@ -4,7 +4,8 @@
 #include "Game.h"
 #include "Date.h"
 #include <string>
-
+#include "Empresa.h"
+#include "BST.h"
 using namespace std;
 
 class HomeGame: public Game {
@@ -26,12 +27,12 @@ public:
 	 * @param publisher Publicador
 	 */
 	HomeGame(int age_limit, string name, double price, int rating,
-			string platform, string genre, string publisher);
+			string platform, string genre, Empresa *publisher);
 	/**
 	 * @brief Carregar um jogo atraves de um ficheiro.
 	 * @param file Nome do ficheiro  a ser carregado sem o .txt.
 	 */
-	void importGameInfo(string file);
+	void importGameInfo(string file, BST<Empresa*> empresas);
 };
 
 #endif /* HOMEGAME_H_ */
